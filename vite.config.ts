@@ -49,12 +49,34 @@
         '@': path.resolve(__dirname, './src'),
       },
     },
+    // GitHub Pages deployment configuration
+    base: process.env.NODE_ENV === 'production' ? '/ClockSense/' : '/',
     build: {
       target: 'esnext',
-      outDir: 'build',
+      outDir: 'dist',
+      sourcemap: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['react', 'react-dom'],
+            charts: ['recharts'],
+            ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-popover']
+          }
+        }
+      }
     },
     server: {
       port: 3000,
       open: true,
+      host: true, // Allow access from network
+      cors: true,
+    },
+    preview: {
+      port: 4173,
+      open: true,
+      host: true,
+    },
+    define: {
+      global: 'globalThis',
     },
   });

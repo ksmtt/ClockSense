@@ -1,0 +1,170 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Build outputs
+dist/
+build/
+out/
+.output/
+coverage/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Environment files (keep local versions private)
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime cache
+.cache/
+.parcel-cache/
+.vite/
+.nx/cache/
+
+# Testing
+coverage/
+.nyc_output/
+.jest/
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
+
+# Storybook build outputs
+storybook-static
+
+# Temporary folders
+tmp/
+temp/
+
+# Local development files
+.local/
+*.local
+
+# Backup files
+*.backup
+*.bak
+*.tmp
+
+# Custom local configuration
+config.local.js
+config.local.json
+settings.local.json
+
+# Developer specific files
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+*.code-workspace
+
+# Local database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Local certificates
+*.pem
+*.key
+*.crt
+
+# Local scripts and utilities
+scripts/local/
+utils/local/
+
+# Personal notes and documentation
+NOTES.md
+TODO.md
+PERSONAL.md
+
+# API keys and secrets (even though they should be in .env files)
+**/secrets/
+**/keys/
+*.secret
+api-keys.json
+
+# Local server data
+server-data/
+local-data/
+
+# Docker local files
+docker-compose.override.yml
+.dockerignore.local
+
+# Local testing artifacts
+test-results/
+screenshots/
+videos/
+
+# Development artifacts
+.development/
+.dev/
+
+# Clockify specific local files
+clockify-config.local.json
+time-entries.local.json
+contracts.local.json

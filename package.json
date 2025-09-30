@@ -58,6 +58,14 @@
       },
       "scripts": {
           "dev": "vite",
-          "build": "vite build"
+          "build": "vite build",
+          "preview": "vite preview",
+          "serve": "vite preview --port 4173",
+          "build:dev": "vite build --mode development",
+          "build:prod": "vite build --mode production",
+          "type-check": "tsc --noEmit",
+          "lint": "echo 'Linting not configured yet'",
+          "clean": "rimraf dist build coverage .vite",
+          "start": "npm run dev"
       }
   }
