@@ -20,35 +20,35 @@ Advanced contract hours tracker for Clockify with multi-contract support, overti
 
 ClockSense is a private addon designed for personal time tracking among friends. It transforms your Clockify experience by providing sophisticated contract hours management and analysis for small groups and personal projects.
 
-**Key Features:**
+Key Features:
 
-- **Multi-Contract Support**: Manage multiple contracts with different weekly hour commitments
-- **Real-Time Tracking**: Live sync with Clockify time entries for instant progress updates
-- **Overtime Analysis**: Automatic detection and visualization of overtime hours
-- **Progress Monitoring**: Visual charts showing contract completion status and remaining hours
-- **Flexible Time Periods**: Track weekly, monthly, or custom date ranges
-- **Vacation Management**: Built-in vacation day tracking and balance calculations
-- **Smart Notifications**: Customizable alerts for contract deadlines and overtime thresholds
-- **Data Visualization**: Beautiful charts and graphs powered by Recharts
-- **Export Capabilities**: Generate reports and backup data for external analysis
-- **Responsive Design**: Works seamlessly across desktop and mobile devices
+• Multi-Contract Support: Manage multiple contracts with different weekly hour commitments
+• Real-Time Tracking: Live sync with Clockify time entries for instant progress updates
+• Overtime Analysis: Automatic detection and visualization of overtime hours
+• Progress Monitoring: Visual charts showing contract completion status and remaining hours
+• Flexible Time Periods: Track weekly, monthly, or custom date ranges
+• Vacation Management: Built-in vacation day tracking and balance calculations
+• Smart Notifications: Customizable alerts for contract deadlines and overtime thresholds
+• Data Visualization: Beautiful charts and graphs powered by Recharts
+• Export Capabilities: Generate reports and backup data for external analysis
+• Responsive Design: Works seamlessly across desktop and mobile devices
 
-**Perfect For:**
+Perfect For:
 
-- Students with part-time work contracts
-- Freelancers managing client projects among friends
-- Small teams tracking project hours
-- Anyone with flexible hour commitments
+• Students with part-time work contracts
+• Freelancers managing client projects among friends
+• Small teams tracking project hours
+• Anyone with flexible hour commitments
 
-**Privacy & Security:**
+Privacy & Security:
 
-- All data stored locally in your browser
-- Private addon access for invited users only
-- Optional Clockify API integration for real-time sync
-- No third-party data transmission
-- Full control over your time tracking data
+• All data stored locally in your browser
+• Private addon access for invited users only
+• Optional Clockify API integration for real-time sync
+• No third-party data transmission
+• Full control over your time tracking data
 
-**Private Use Notice:**
+Private Use Notice:
 This addon is developed for personal use and close friends. Access is restricted and not intended for commercial or public distribution.
 
 ## 🔗 Required URLs

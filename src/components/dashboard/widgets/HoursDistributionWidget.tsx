@@ -1,5 +1,5 @@
 import { PieChart as PieChartIcon } from 'lucide-react';
-import { Chart, ChartContainer, ChartTooltip } from '../../ui/chart';
+import { ChartContainer, ChartTooltip } from '../../ui/chart';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 import { Contract, TimeEntry } from '../../../hooks/useClockifyData';
