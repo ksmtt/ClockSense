@@ -1,0 +1,122 @@
+<!-- Gallery Image 2: Contract Management - 1200x780px -->
+<svg width="1200" height="780" viewBox="0 0 1200 780" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="clockifyHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#03a9f4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0288d1;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#00000020"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="780" fill="url(#bg)"/>
+  
+  <!-- Clockify Header -->
+  <rect width="1200" height="80" fill="url(#clockifyHeader)"/>
+  <text x="60" y="45" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white">Clockify</text>
+  <text x="200" y="45" font-family="Arial, sans-serif" font-size="16" fill="white" opacity="0.9">Contract Manager</text>
+  
+  <!-- Main Content -->
+  <rect x="40" y="120" width="1120" height="620" rx="12" fill="white" filter="url(#shadow)"/>
+  
+  <!-- Title -->
+  <text x="80" y="160" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#1e293b">Contract Management</text>
+  <text x="80" y="185" font-family="Arial, sans-serif" font-size="16" fill="#64748b">Manage multiple contracts and track progress</text>
+  
+  <!-- Add New Contract Button -->
+  <rect x="900" y="140" width="200" height="40" rx="8" fill="#03a9f4"/>
+  <text x="1000" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">+ Add New Contract</text>
+  
+  <!-- Contract Cards -->
+  <g transform="translate(80, 220)">
+    <!-- Contract 1 -->
+    <rect width="480" height="180" rx="12" fill="white" stroke="#e2e8f0" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="480" height="50" rx="12" fill="#f0f9ff"/>
+    
+    <text x="20" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#03a9f4">Part-time Development Contract</text>
+    <circle cx="440" cy="25" r="8" fill="#22c55e"/>
+    
+    <text x="20" y="80" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Weekly Hours:</text>
+    <text x="130" y="80" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1e293b">40 hours</text>
+    
+    <text x="20" y="105" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Rate:</text>
+    <text x="130" y="105" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1e293b">€25/hour</text>
+    
+    <text x="20" y="130" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Progress:</text>
+    <rect x="130" y="115" width="200" height="12" rx="6" fill="#e2e8f0"/>
+    <rect x="130" y="115" width="162" height="12" rx="6" fill="#03a9f4"/>
+    <text x="340" y="125" font-family="Arial, sans-serif" font-size="12" fill="#64748b">81% (32.4/40h)</text>
+    
+    <text x="20" y="155" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Status:</text>
+    <rect x="130" y="140" width="60" height="24" rx="12" fill="#dcfce7"/>
+    <text x="160" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#16a34a">Active</text>
+    
+    <!-- Contract 2 -->
+    <rect x="520" y="0" width="480" height="180" rx="12" fill="white" stroke="#e2e8f0" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="520" y="0" width="480" height="50" rx="12" fill="#fef3c7"/>
+    
+    <text x="540" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#d97706">Freelance Web Design</text>
+    <circle cx="960" cy="25" r="8" fill="#eab308"/>
+    
+    <text x="540" y="80" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Weekly Hours:</text>
+    <text x="650" y="80" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1e293b">20 hours</text>
+    
+    <text x="540" y="105" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Rate:</text>
+    <text x="650" y="105" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1e293b">€35/hour</text>
+    
+    <text x="540" y="130" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Progress:</text>
+    <rect x="650" y="115" width="200" height="12" rx="6" fill="#e2e8f0"/>
+    <rect x="650" y="115" width="110" height="12" rx="6" fill="#eab308"/>
+    <text x="860" y="125" font-family="Arial, sans-serif" font-size="12" fill="#64748b">55% (11/20h)</text>
+    
+    <text x="540" y="155" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Status:</text>
+    <rect x="650" y="140" width="80" height="24" rx="12" fill="#fef3c7"/>
+    <text x="690" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#d97706">In Progress</text>
+  </g>
+  
+  <!-- Contract Timeline -->
+  <g transform="translate(80, 450)">
+    <!-- Contract 3 - Completed -->
+    <rect width="1040" height="120" rx="12" fill="white" stroke="#e2e8f0" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="1040" height="40" rx="12" fill="#f0fdf4"/>
+    
+    <text x="20" y="25" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#16a34a">Mobile App Testing - Completed</text>
+    <circle cx="980" cy="20" r="8" fill="#22c55e"/>
+    
+    <text x="20" y="65" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Duration: Feb 1 - Mar 15, 2025</text>
+    <text x="20" y="85" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Total Hours: 160h</text>
+    <text x="20" y="105" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Total Earned: €4,000</text>
+    
+    <rect x="400" y="50" width="600" height="12" rx="6" fill="#dcfce7"/>
+    <rect x="400" y="50" width="600" height="12" rx="6" fill="#22c55e"/>
+    <text x="410" y="80" font-family="Arial, sans-serif" font-size="12" fill="#16a34a">✓ Completed on time</text>
+    
+    <rect x="850" y="45" width="80" height="24" rx="12" fill="#dcfce7"/>
+    <text x="890" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#16a34a">Completed</text>
+  </g>
+  
+  <!-- Stats Summary -->
+  <g transform="translate(80, 610)">
+    <rect width="1040" height="80" rx="12" fill="#f8fafc" stroke="#e2e8f0"/>
+    
+    <text x="20" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1e293b">Contract Summary</text>
+    
+    <text x="20" y="50" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Active Contracts:</text>
+    <text x="150" y="50" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#03a9f4">2</text>
+    
+    <text x="250" y="50" font-family="Arial, sans-serif" font-size="14" fill="#64748b">This Week:</text>
+    <text x="340" y="50" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1e293b">43.4h logged</text>
+    
+    <text x="500" y="50" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Monthly Earnings:</text>
+    <text x="630" y="50" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#16a34a">€3,245</text>
+    
+    <text x="780" y="50" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Completed:</text>
+    <text x="860" y="50" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#22c55e">1 contract</text>
+  </g>
+</svg>

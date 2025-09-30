@@ -1,0 +1,156 @@
+<!-- Gallery Image 3: Analytics & Charts - 1200x780px -->
+<svg width="1200" height="780" viewBox="0 0 1200 780" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="clockifyHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#03a9f4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0288d1;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#00000020"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="780" fill="url(#bg)"/>
+  
+  <!-- Clockify Header -->
+  <rect width="1200" height="80" fill="url(#clockifyHeader)"/>
+  <text x="60" y="45" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white">Clockify</text>
+  <text x="200" y="45" font-family="Arial, sans-serif" font-size="16" fill="white" opacity="0.9">Time Analytics</text>
+  
+  <!-- Main Content -->
+  <rect x="40" y="120" width="1120" height="620" rx="12" fill="white" filter="url(#shadow)"/>
+  
+  <!-- Title -->
+  <text x="80" y="160" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#1e293b">Time Analytics</text>
+  <text x="80" y="185" font-family="Arial, sans-serif" font-size="16" fill="#64748b">Advanced insights into your work patterns</text>
+  
+  <!-- Time Period Selector -->
+  <g transform="translate(900, 140)">
+    <rect width="200" height="35" rx="6" fill="#f1f5f9" stroke="#e2e8f0"/>
+    <text x="100" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#475569">Last 30 Days ▼</text>
+  </g>
+  
+  <!-- Main Chart - Hours Distribution -->
+  <g transform="translate(80, 220)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1e293b">Daily Hours Distribution</text>
+    
+    <rect x="0" y="20" width="720" height="280" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    
+    <!-- Chart Grid Lines -->
+    <g transform="translate(40, 50)">
+      <!-- Y-axis labels -->
+      <text x="-10" y="235" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#94a3b8">0</text>
+      <text x="-10" y="190" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#94a3b8">2</text>
+      <text x="-10" y="145" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#94a3b8">4</text>
+      <text x="-10" y="100" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#94a3b8">6</text>
+      <text x="-10" y="55" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#94a3b8">8</text>
+      <text x="-10" y="10" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#94a3b8">10</text>
+      
+      <!-- Grid lines -->
+      <line x1="0" y1="230" x2="640" y2="230" stroke="#e2e8f0" stroke-width="1"/>
+      <line x1="0" y1="185" x2="640" y2="185" stroke="#e2e8f0" stroke-width="1"/>
+      <line x1="0" y1="140" x2="640" y2="140" stroke="#e2e8f0" stroke-width="1"/>
+      <line x1="0" y1="95" x2="640" y2="95" stroke="#e2e8f0" stroke-width="1"/>
+      <line x1="0" y1="50" x2="640" y2="50" stroke="#e2e8f0" stroke-width="1"/>
+      
+      <!-- Data Points and Line Chart -->
+      <g stroke="#03a9f4" stroke-width="3" fill="none">
+        <polyline points="20,140 60,95 100,110 140,80 180,90 220,70 260,85 300,60 340,75 380,50 420,65 460,85 500,110 540,95 580,120 620,105"/>
+      </g>
+      
+      <!-- Data Point Dots -->
+      <g fill="#03a9f4">
+        <circle cx="20" cy="140" r="4"/>
+        <circle cx="60" cy="95" r="4"/>
+        <circle cx="100" cy="110" r="4"/>
+        <circle cx="140" cy="80" r="4"/>
+        <circle cx="180" cy="90" r="4"/>
+        <circle cx="220" cy="70" r="4"/>
+        <circle cx="260" cy="85" r="4"/>
+        <circle cx="300" cy="60" r="4"/>
+        <circle cx="340" cy="75" r="4"/>
+        <circle cx="380" cy="50" r="4"/>
+        <circle cx="420" cy="65" r="4"/>
+        <circle cx="460" cy="85" r="4"/>
+        <circle cx="500" cy="110" r="4"/>
+        <circle cx="540" cy="95" r="4"/>
+        <circle cx="580" cy="120" r="4"/>
+        <circle cx="620" cy="105" r="4"/>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Weekly Breakdown Pie Chart -->
+  <g transform="translate(840, 220)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1e293b">Project Breakdown</text>
+    
+    <rect x="0" y="20" width="280" height="280" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    
+    <!-- Pie Chart (simplified) -->
+    <g transform="translate(140, 160)">
+      <!-- Pie slices -->
+      <path d="M 0,-80 A 80,80 0 0,1 69.28,40 L 0,0 Z" fill="#03a9f4"/>
+      <path d="M 69.28,40 A 80,80 0 0,1 -25.7,75.67 L 0,0 Z" fill="#10b981"/>
+      <path d="M -25.7,75.67 A 80,80 0 0,1 -76.6,-20.9 L 0,0 Z" fill="#f59e0b"/>
+      <path d="M -76.6,-20.9 A 80,80 0 0,1 0,-80 L 0,0 Z" fill="#ef4444"/>
+    </g>
+    
+    <!-- Legend -->
+    <g transform="translate(20, 240)">
+      <rect x="0" y="0" width="12" height="12" fill="#03a9f4"/>
+      <text x="20" y="10" font-family="Arial, sans-serif" font-size="12" fill="#1e293b">Development (45%)</text>
+      
+      <rect x="120" y="0" width="12" height="12" fill="#10b981"/>
+      <text x="140" y="10" font-family="Arial, sans-serif" font-size="12" fill="#1e293b">Design (25%)</text>
+      
+      <rect x="0" y="20" width="12" height="12" fill="#f59e0b"/>
+      <text x="20" y="30" font-family="Arial, sans-serif" font-size="12" fill="#1e293b">Testing (20%)</text>
+      
+      <rect x="120" y="20" width="12" height="12" fill="#ef4444"/>
+      <text x="140" y="30" font-family="Arial, sans-serif" font-size="12" fill="#1e293b">Meetings (10%)</text>
+    </g>
+  </g>
+  
+  <!-- Stats Cards -->
+  <g transform="translate(80, 540)">
+    <!-- Average Hours -->
+    <rect width="200" height="100" rx="8" fill="#f0f9ff" stroke="#03a9f4" stroke-width="2"/>
+    <text x="20" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#03a9f4">Daily Average</text>
+    <text x="20" y="50" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1e293b">7.2h</text>
+    <text x="20" y="70" font-family="Arial, sans-serif" font-size="12" fill="#64748b">+0.3h from last month</text>
+    
+    <!-- Most Productive Day -->
+    <rect x="220" y="0" width="200" height="100" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+    <text x="240" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#22c55e">Peak Day</text>
+    <text x="240" y="50" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1e293b">Tuesday</text>
+    <text x="240" y="70" font-family="Arial, sans-serif" font-size="12" fill="#64748b">8.5h average</text>
+    
+    <!-- Overtime Hours -->
+    <rect x="440" y="0" width="200" height="100" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="460" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#f59e0b">Overtime</text>
+    <text x="460" y="50" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1e293b">12.5h</text>
+    <text x="460" y="70" font-family="Arial, sans-serif" font-size="12" fill="#64748b">This month</text>
+    
+    <!-- Efficiency Score -->
+    <rect x="660" y="0" width="200" height="100" rx="8" fill="#fdf2f8" stroke="#ec4899" stroke-width="2"/>
+    <text x="680" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ec4899">Efficiency</text>
+    <text x="680" y="50" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1e293b">94%</text>
+    <text x="680" y="70" font-family="Arial, sans-serif" font-size="12" fill="#64748b">+2% improvement</text>
+    
+    <!-- Export Button -->
+    <rect x="880" y="30" width="120" height="40" rx="8" fill="#6366f1"/>
+    <text x="940" y="54" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Export Report</text>
+  </g>
+  
+  <!-- Insights Panel -->
+  <g transform="translate(80, 660)">
+    <rect width="1040" height="60" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/>
+    <text x="20" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1e293b">📊 Insights</text>
+    <text x="20" y="45" font-family="Arial, sans-serif" font-size="14" fill="#475569">Your most productive hours are between 9-11 AM. Consider scheduling complex tasks during this time.</text>
+  </g>
+</svg>
