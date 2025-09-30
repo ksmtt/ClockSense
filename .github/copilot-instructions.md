@@ -77,6 +77,48 @@ Using existing CSS variables:
 - **DO NOT MODIFY**: `src/components/ui/` (ShadCN components)
 - **DO NOT MODIFY**: `src/components/figma/` (Figma imports)
 - **FOLLOW STRUCTURE**: Maintain organized file structure as documented
+- **MANIFEST UPDATES**: When adding features that require Clockify API access, update `public/manifest.json` scopes accordingly
+
+## Clockify Integration Management
+
+### API Functionality Reference
+
+**When implementing Clockify API features:**
+
+1. **API Documentation** - Use https://docs.clockify.me/ for comprehensive API reference
+2. **Authentication** - Prioritize `x-addon-token` (addon deployment) over `X-Api-Key` (development fallback)
+   - **Primary**: Use `x-addon-token` from URL parameters when deployed as Clockify addon
+   - **Fallback**: Use `X-Api-Key` for local development when addon token unavailable
+   - Implementation already handles this priority in `ClockifyApiService.makeRequest()`
+3. **Rate Limiting** - 50 requests per second per addon per workspace via x-addon-token
+4. **Regional APIs** - Use appropriate base URLs (global, EU, USA, UK, AU regions)
+5. **API Categories Available:**
+   - **User Management**: Profile, memberships, custom fields, team managers
+   - **Time Tracking**: Time entries, start/stop timer, bulk operations
+   - **Project Management**: Projects, tasks, estimates, memberships
+   - **Workspace**: Settings, users, cost/hourly rates
+   - **Reporting**: Detailed, summary, weekly reports with filtering
+   - **Time Off**: Policies, requests, balances (PTO system)
+   - **Invoicing**: Invoice creation, payments, expense tracking
+   - **Scheduling**: Assignments, recurring schedules, capacity planning
+   - **Webhooks**: Real-time notifications for workspace events
+
+### Manifest Configuration
+
+**When modifying code that impacts Clockify integration:**
+
+1. **Check required scopes** - Review what Clockify API endpoints your code uses
+2. **Update manifest scopes** - Add only necessary scopes to `public/manifest.json`
+3. **Follow Clockify schema v1.3** - Reference: https://dev-docs.marketplace.cake.com/clockify/build/manifest.html
+4. **Settings structure** - Use both tab-level and group-level settings as per Clockify docs
+5. **Valid scopes only** - Use scopes from official Clockify documentation
+
+**Available Clockify Scopes** (use only what's needed):
+
+- `TIME_ENTRY_READ/WRITE`, `USER_READ/WRITE`, `PROJECT_READ/WRITE`
+- `TAG_READ/WRITE`, `REPORTS_READ/WRITE`, `WORKSPACE_READ/WRITE`
+- `CLIENT_READ/WRITE`, `TASK_READ/WRITE`, `CUSTOM_FIELDS_READ/WRITE`
+- Full list: https://dev-docs.marketplace.cake.com/clockify/build/manifest.html#scopes
 
 ## When Making Changes
 
@@ -86,8 +128,9 @@ Using existing CSS variables:
 4. **Use CSS variables** in component implementation (never hardcode)
 5. **Reference design patterns** from `src/guidelines/Guidelines.md`
 6. Ensure responsive design and accessibility
-7. Test loading states and error scenarios
-8. Maintain consistent naming conventions
+7. **Include loading states and error handling** in component design (I can review code for proper state handling)
+8. **Update manifest scopes** if adding new Clockify API functionality
+9. Maintain consistent naming conventions
 
 ## Review & Validation Protocol
 

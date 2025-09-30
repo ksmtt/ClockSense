@@ -1,0 +1,4 @@
+<!-- This is a placeholder file indicating where the icon should be placed -->
+<!-- You should replace this with an actual PNG icon file -->
+<!-- Recommended size: 32x32 pixels or 64x64 pixels -->
+<!-- Icon should represent time tracking/contract management -->
