@@ -20,13 +20,41 @@ const WIDGET_TYPES = {
     name: 'Quick Stats Overview',
     description: 'Contract totals, weekly hours, progress, and overtime summary'
   },
+  totalHours: {
+    name: 'Total Hours',
+    description: 'Total hours worked on the contract'
+  },
+  thisWeek: {
+    name: 'This Week',
+    description: 'Hours worked this week'
+  },
+  contractProgress: {
+    name: 'Contract Progress',
+    description: 'Progress towards contract completion'
+  },
+  overtime: {
+    name: 'Overtime',
+    description: 'Overtime hours tracking'
+  },
   dailyHours: {
     name: 'Daily Hours Chart',
     description: 'Bar chart showing actual vs expected hours over time'
   },
+  weeklyTrend: {
+    name: 'Weekly Trend',
+    description: 'Trend analysis of weekly hours'
+  },
   hoursDistribution: {
     name: 'Hours Distribution',
     description: 'Pie chart showing work hours breakdown and overtime'
+  },
+  contractTimeline: {
+    name: 'Contract Timeline',
+    description: 'Timeline view of contract progress'
+  },
+  breakTimeAnalysis: {
+    name: 'Break Time Analysis',
+    description: 'Analysis of break times and patterns'
   },
   performanceLegend: {
     name: 'Performance Legend',

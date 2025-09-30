@@ -5,7 +5,7 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Chart, ChartContainer, ChartTooltip, ChartTooltipContent } from './ui/chart';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from './ui/chart';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LineChart, Line, Area, AreaChart, Cell } from 'recharts';
 import { Contract, TimeEntry, AppSettings } from '../hooks/useClockifyData';
 import { TimeEntriesDataView } from './TimeEntriesDataView';

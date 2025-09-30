@@ -16,13 +16,14 @@ export interface TimeEntry {
   date: string;
   hours: number;
   projectName?: string;
+  project?: string; // Alternative project field
   description?: string;
   tags?: string[]; // Tag IDs from Clockify API
 }
 
 export interface DashboardWidgetConfig {
   id: string;
-  type: 'totalHours' | 'thisWeek' | 'contractProgress' | 'overtime' | 'dailyHours' | 'hoursDistribution' | 'performanceLegend' | 'weeklyTrend' | 'contractTimeline' | 'breakTimeAnalysis';
+  type: 'totalHours' | 'thisWeek' | 'contractProgress' | 'overtime' | 'dailyHours' | 'hoursDistribution' | 'performanceLegend' | 'weeklyTrend' | 'contractTimeline' | 'breakTimeAnalysis' | 'quickStats';
   enabled: boolean;
   size: 'compact' | 'medium' | 'large';
   position: number;

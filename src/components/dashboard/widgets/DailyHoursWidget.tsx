@@ -1,5 +1,5 @@
 import { BarChart3 } from 'lucide-react';
-import { Chart, ChartContainer, ChartTooltip } from '../../ui/chart';
+import { ChartContainer, ChartTooltip } from '../../ui/chart';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell } from 'recharts';
 
 import { Contract, TimeEntry, AppSettings } from '../../../hooks/useClockifyData';

@@ -55,6 +55,12 @@ const MIN_CELL_SIZE = 60; // Minimum cell size in pixels
 const GRID_GAP = 8; // Gap between grid cells
 
 const WIDGET_TYPES = {
+  quickStats: {
+    name: 'Quick Stats', 
+    defaultSize: { width: 8, height: 3 },
+    minSize: { width: 6, height: 2 },
+    maxSize: { width: 12, height: 4 }
+  },
   totalHours: { 
     name: 'Total Hours', 
     defaultSize: { width: 3, height: 2 },

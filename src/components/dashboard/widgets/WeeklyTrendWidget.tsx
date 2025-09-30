@@ -1,5 +1,5 @@
 import { TrendingUp } from 'lucide-react';
-import { Chart, ChartContainer, ChartTooltip } from '../../ui/chart';
+import { ChartContainer, ChartTooltip } from '../../ui/chart';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, ReferenceLine } from 'recharts';
 import { Contract, TimeEntry, AppSettings } from '../../../hooks/useClockifyData';
 import { useMemo } from 'react';
