@@ -1,0 +1,122 @@
+<!-- Gallery Image 1: Dashboard Overview - 1200x780px -->
+<svg width="1200" height="780" viewBox="0 0 1200 780" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="clockifyHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#03a9f4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0288d1;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#00000020"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="780" fill="url(#bg)"/>
+  
+  <!-- Clockify Header -->
+  <rect width="1200" height="80" fill="url(#clockifyHeader)"/>
+  <text x="60" y="45" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white">Clockify</text>
+  <text x="200" y="45" font-family="Arial, sans-serif" font-size="16" fill="white" opacity="0.9">ClockSense Addon</text>
+  
+  <!-- Addon Icon in Header -->
+  <rect x="1100" y="20" width="40" height="40" rx="8" fill="white"/>
+  <rect x="1105" y="25" width="30" height="30" rx="6" fill="#03a9f4"/>
+  
+  <!-- Main Content Area -->
+  <rect x="40" y="120" width="1120" height="620" rx="12" fill="white" filter="url(#shadow)"/>
+  
+  <!-- ClockSense Title -->
+  <text x="80" y="160" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#1e293b">ClockSense Dashboard</text>
+  <text x="80" y="185" font-family="Arial, sans-serif" font-size="16" fill="#64748b">Private Contract Hours Tracker</text>
+  
+  <!-- Contract Overview Cards -->
+  <g transform="translate(80, 220)">
+    <!-- Card 1: Active Contract -->
+    <rect width="330" height="140" rx="8" fill="#f0f9ff" stroke="#03a9f4" stroke-width="2"/>
+    <text x="20" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#03a9f4">Active Contract</text>
+    <text x="20" y="55" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Part-time Development</text>
+    <text x="20" y="80" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1e293b">32.5h</text>
+    <text x="20" y="100" font-family="Arial, sans-serif" font-size="14" fill="#64748b">of 40h this week</text>
+    
+    <!-- Progress Bar -->
+    <rect x="20" y="110" width="290" height="8" rx="4" fill="#e2e8f0"/>
+    <rect x="20" y="110" width="236" height="8" rx="4" fill="#03a9f4"/>
+    
+    <!-- Card 2: Weekly Stats -->
+    <rect x="360" y="0" width="330" height="140" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+    <text x="380" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#22c55e">This Week</text>
+    <text x="380" y="55" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Total Hours Logged</text>
+    <text x="380" y="80" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1e293b">37.2h</text>
+    <text x="380" y="100" font-family="Arial, sans-serif" font-size="14" fill="#64748b">+2.5h overtime</text>
+    
+    <!-- Card 3: Vacation Balance -->
+    <rect x="720" y="0" width="330" height="140" rx="8" fill="#fefce8" stroke="#eab308" stroke-width="2"/>
+    <text x="740" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#eab308">Vacation Days</text>
+    <text x="740" y="55" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Remaining Balance</text>
+    <text x="740" y="80" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1e293b">18.5</text>
+    <text x="740" y="100" font-family="Arial, sans-serif" font-size="14" fill="#64748b">days available</text>
+  </g>
+  
+  <!-- Charts Section -->
+  <g transform="translate(80, 400)">
+    <!-- Chart Title -->
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1e293b">Weekly Hours Trend</text>
+    
+    <!-- Chart Background -->
+    <rect x="0" y="40" width="520" height="260" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    
+    <!-- Chart Data (Simplified Bar Chart) -->
+    <g transform="translate(40, 80)">
+      <!-- Days -->
+      <text x="30" y="240" font-family="Arial, sans-serif" font-size="12" fill="#64748b">Mon</text>
+      <text x="90" y="240" font-family="Arial, sans-serif" font-size="12" fill="#64748b">Tue</text>
+      <text x="150" y="240" font-family="Arial, sans-serif" font-size="12" fill="#64748b">Wed</text>
+      <text x="210" y="240" font-family="Arial, sans-serif" font-size="12" fill="#64748b">Thu</text>
+      <text x="270" y="240" font-family="Arial, sans-serif" font-size="12" fill="#64748b">Fri</text>
+      <text x="330" y="240" font-family="Arial, sans-serif" font-size="12" fill="#64748b">Sat</text>
+      <text x="390" y="240" font-family="Arial, sans-serif" font-size="12" fill="#64748b">Sun</text>
+      
+      <!-- Bars -->
+      <rect x="20" y="50" width="30" height="160" fill="#03a9f4" rx="4"/>
+      <rect x="80" y="30" width="30" height="180" fill="#03a9f4" rx="4"/>
+      <rect x="140" y="70" width="30" height="140" fill="#03a9f4" rx="4"/>
+      <rect x="200" y="40" width="30" height="170" fill="#03a9f4" rx="4"/>
+      <rect x="260" y="90" width="30" height="120" fill="#03a9f4" rx="4"/>
+      <rect x="320" y="180" width="30" height="30" fill="#e2e8f0" rx="4"/>
+      <rect x="380" y="190" width="30" height="20" fill="#e2e8f0" rx="4"/>
+    </g>
+  </g>
+  
+  <!-- Recent Activity -->
+  <g transform="translate(640, 400)">
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1e293b">Recent Activity</text>
+    
+    <rect x="0" y="40" width="410" height="260" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    
+    <!-- Activity Items -->
+    <g transform="translate(20, 70)">
+      <circle cx="8" cy="8" r="4" fill="#22c55e"/>
+      <text x="25" y="12" font-family="Arial, sans-serif" font-size="14" fill="#1e293b">Contract updated: Part-time Dev</text>
+      <text x="25" y="28" font-family="Arial, sans-serif" font-size="12" fill="#64748b">2 hours ago</text>
+      
+      <circle cx="8" cy="58" r="4" fill="#03a9f4"/>
+      <text x="25" y="62" font-family="Arial, sans-serif" font-size="14" fill="#1e293b">Time entry: Frontend work</text>
+      <text x="25" y="78" font-family="Arial, sans-serif" font-size="12" fill="#64748b">4 hours ago</text>
+      
+      <circle cx="8" cy="108" r="4" fill="#eab308"/>
+      <text x="25" y="112" font-family="Arial, sans-serif" font-size="14" fill="#1e293b">Vacation day scheduled</text>
+      <text x="25" y="128" font-family="Arial, sans-serif" font-size="12" fill="#64748b">Yesterday</text>
+      
+      <circle cx="8" cy="158" r="4" fill="#8b5cf6"/>
+      <text x="25" y="162" font-family="Arial, sans-serif" font-size="14" fill="#1e293b">Report exported</text>
+      <text x="25" y="178" font-family="Arial, sans-serif" font-size="12" fill="#64748b">2 days ago</text>
+    </g>
+  </g>
+  
+  <!-- Footer -->
+  <text x="80" y="760" font-family="Arial, sans-serif" font-size="12" fill="#94a3b8">ClockSense - Private Contract Hours Tracker for Clockify</text>
+</svg>

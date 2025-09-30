@@ -1,0 +1,150 @@
+<!-- Gallery Image 4: Settings &amp; Configuration - 1200x780px -->
+<svg width="1200" height="780" viewBox="0 0 1200 780" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="clockifyHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#03a9f4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0288d1;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#00000020"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="780" fill="url(#bg)"/>
+  
+  <!-- Clockify Header -->
+  <rect width="1200" height="80" fill="url(#clockifyHeader)"/>
+  <text x="60" y="45" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white">Clockify</text>
+  <text x="200" y="45" font-family="Arial, sans-serif" font-size="16" fill="white" opacity="0.9">ClockSense Settings</text>
+  
+  <!-- Main Content -->
+  <rect x="40" y="120" width="1120" height="620" rx="12" fill="white" filter="url(#shadow)"/>
+  
+  <!-- Title -->
+  <text x="80" y="160" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#1e293b">Settings</text>
+  <text x="80" y="185" font-family="Arial, sans-serif" font-size="16" fill="#64748b">Configure your ClockSense addon preferences</text>
+  
+  <!-- Settings Navigation -->
+  <g transform="translate(80, 220)">
+    <rect width="250" height="480" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    
+    <!-- Navigation Items -->
+    <rect x="10" y="10" width="230" height="40" rx="6" fill="#03a9f4"/>
+    <text x="25" y="35" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">🔧 General</text>
+    
+    <rect x="10" y="60" width="230" height="40" rx="6" fill="transparent"/>
+    <text x="25" y="85" font-family="Arial, sans-serif" font-size="14" fill="#64748b">🔗 Clockify API</text>
+    
+    <rect x="10" y="110" width="230" height="40" rx="6" fill="transparent"/>
+    <text x="25" y="135" font-family="Arial, sans-serif" font-size="14" fill="#64748b">📊 Dashboard</text>
+    
+    <rect x="10" y="160" width="230" height="40" rx="6" fill="transparent"/>
+    <text x="25" y="185" font-family="Arial, sans-serif" font-size="14" fill="#64748b">🔔 Notifications</text>
+    
+    <rect x="10" y="210" width="230" height="40" rx="6" fill="transparent"/>
+    <text x="25" y="235" font-family="Arial, sans-serif" font-size="14" fill="#64748b">📈 Reports</text>
+    
+    <rect x="10" y="260" width="230" height="40" rx="6" fill="transparent"/>
+    <text x="25" y="285" font-family="Arial, sans-serif" font-size="14" fill="#64748b">💾 Data &amp; Privacy</text>
+    
+    <rect x="10" y="310" width="230" height="40" rx="6" fill="transparent"/>
+    <text x="25" y="335" font-family="Arial, sans-serif" font-size="14" fill="#64748b">🎨 Appearance</text>
+    
+    <!-- Version Info -->
+    <text x="25" y="430" font-family="Arial, sans-serif" font-size="12" fill="#94a3b8">ClockSense v1.0.0</text>
+    <text x="25" y="450" font-family="Arial, sans-serif" font-size="12" fill="#94a3b8">Private Addon</text>
+  </g>
+  
+  <!-- Settings Content Panel -->
+  <g transform="translate(370, 220)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1e293b">General Settings</text>
+    
+    <!-- Settings Form -->
+    <g transform="translate(0, 40)">
+      <!-- Default Working Hours -->
+      <text x="0" y="20" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#374151">Default Working Hours</text>
+      <text x="0" y="40" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Set your standard working hours per week</text>
+      
+      <rect x="0" y="50" width="200" height="35" rx="6" fill="white" stroke="#d1d5db"/>
+      <text x="15" y="72" font-family="Arial, sans-serif" font-size="14" fill="#374151">40 hours/week</text>
+      
+      <!-- Time Zone -->
+      <text x="0" y="120" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#374151">Time Zone</text>
+      <text x="0" y="140" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Your local time zone for accurate tracking</text>
+      
+      <rect x="0" y="150" width="300" height="35" rx="6" fill="white" stroke="#d1d5db"/>
+      <text x="15" y="172" font-family="Arial, sans-serif" font-size="14" fill="#374151">Europe/Berlin (UTC+1)</text>
+      <text x="270" y="172" font-family="Arial, sans-serif" font-size="14" fill="#64748b">▼</text>
+      
+      <!-- Weekend Settings -->
+      <text x="0" y="220" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#374151">Weekend Settings</text>
+      <text x="0" y="240" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Choose your working days</text>
+      
+      <!-- Checkboxes -->
+      <g transform="translate(0, 250)">
+        <rect x="0" y="10" width="16" height="16" rx="3" fill="#03a9f4" stroke="#03a9f4"/>
+        <text x="6" y="22" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">✓</text>
+        <text x="25" y="22" font-family="Arial, sans-serif" font-size="14" fill="#374151">Monday</text>
+        
+        <rect x="100" y="10" width="16" height="16" rx="3" fill="#03a9f4" stroke="#03a9f4"/>
+        <text x="106" y="22" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">✓</text>
+        <text x="125" y="22" font-family="Arial, sans-serif" font-size="14" fill="#374151">Tuesday</text>
+        
+        <rect x="200" y="10" width="16" height="16" rx="3" fill="#03a9f4" stroke="#03a9f4"/>
+        <text x="206" y="22" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">✓</text>
+        <text x="225" y="22" font-family="Arial, sans-serif" font-size="14" fill="#374151">Wednesday</text>
+        
+        <rect x="320" y="10" width="16" height="16" rx="3" fill="#03a9f4" stroke="#03a9f4"/>
+        <text x="326" y="22" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">✓</text>
+        <text x="345" y="22" font-family="Arial, sans-serif" font-size="14" fill="#374151">Thursday</text>
+        
+        <rect x="430" y="10" width="16" height="16" rx="3" fill="#03a9f4" stroke="#03a9f4"/>
+        <text x="436" y="22" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">✓</text>
+        <text x="455" y="22" font-family="Arial, sans-serif" font-size="14" fill="#374151">Friday</text>
+        
+        <rect x="0" y="40" width="16" height="16" rx="3" fill="white" stroke="#d1d5db"/>
+        <text x="25" y="52" font-family="Arial, sans-serif" font-size="14" fill="#374151">Saturday</text>
+        
+        <rect x="100" y="40" width="16" height="16" rx="3" fill="white" stroke="#d1d5db"/>
+        <text x="125" y="52" font-family="Arial, sans-serif" font-size="14" fill="#374151">Sunday</text>
+      </g>
+      
+      <!-- Auto-sync Toggle -->
+      <text x="0" y="350" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#374151">Auto-sync with Clockify</text>
+      <text x="0" y="370" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Automatically sync time entries from your Clockify account</text>
+      
+      <g transform="translate(0, 380)">
+        <rect x="0" y="0" width="50" height="26" rx="13" fill="#03a9f4"/>
+        <circle cx="37" cy="13" r="10" fill="white"/>
+        <text x="60" y="18" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#16a34a">Enabled</text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Action Buttons -->
+  <g transform="translate(80, 660)">
+    <rect width="120" height="40" rx="8" fill="#e2e8f0"/>
+    <text x="60" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Reset All</text>
+    
+    <rect x="150" y="0" width="120" height="40" rx="8" fill="#6b7280"/>
+    <text x="210" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Cancel</text>
+    
+    <rect x="300" y="0" width="150" height="40" rx="8" fill="#03a9f4"/>
+    <text x="375" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Save Changes</text>
+  </g>
+  
+  <!-- API Status Indicator -->
+  <g transform="translate(900, 220)">
+    <rect width="220" height="120" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+    <circle cx="30" cy="30" r="8" fill="#22c55e"/>
+    <text x="50" y="35" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#16a34a">API Connected</text>
+    <text x="20" y="60" font-family="Arial, sans-serif" font-size="14" fill="#64748b">Clockify API Status</text>
+    <text x="20" y="80" font-family="Arial, sans-serif" font-size="12" fill="#64748b">Last sync: 2 minutes ago</text>
+    <text x="20" y="95" font-family="Arial, sans-serif" font-size="12" fill="#64748b">Rate limit: 48/50 requests</text>
+  </g>
+</svg>
