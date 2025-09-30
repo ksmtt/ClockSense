@@ -1,0 +1,449 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Clockify Light Mode Colors */
+  --font-size: 14px;
+  --background: #FFFFFF;
+  --foreground: rgba(0, 0, 0, 0.87);
+  --card: #FFFFFF;
+  --card-foreground: rgba(0, 0, 0, 0.87);
+  --popover: #FFFFFF;
+  --popover-foreground: rgba(0, 0, 0, 0.87);
+  --primary: #03A9F4;
+  --primary-foreground: #FFFFFF;
+  --primary-hover: #0288D1;
+  --secondary: #F2F6F8;
+  --secondary-foreground: rgba(0, 0, 0, 0.87);
+  --muted: #E4EAEE;
+  --muted-foreground: rgba(0, 0, 0, 0.54);
+  --accent: #E4EAEE;
+  --accent-foreground: rgba(0, 0, 0, 0.87);
+  --destructive: #F44336;
+  --destructive-foreground: #FFFFFF;
+  --border: #C6D2D9;
+  --input: transparent;
+  --input-background: #F2F6F8;
+  --switch-background: #90A4AE;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #03A9F4;
+  
+  /* Clockify Blue-Gray Palette */
+  --bg-01: #F2F6F8;
+  --bg-02: #E4EAEE;
+  --bg-03: #C6D2D9;
+  --bg-04: #90A4AE;
+  --bg-05: #78909C;
+  --bg-06: #607D8B;
+  --bg-07: #546E7A;
+  --bg-08: #455A64;
+  --bg-09: #37474F;
+  --bg-10: #263238;
+  --bg-11: #1D272C;
+  --bg-12: #12191D;
+  
+  /* Chart Colors - Using tokens.json equivalents */
+  --chart-1: #03a9f4;        /* Light Blue - from tokens.json */
+  --chart-2: #4caf50;        /* Green - from tokens.json */
+  --chart-3: #ff9800;        /* Orange - from tokens.json */
+  --chart-4: #9c27b0;        /* Purple - from tokens.json */
+  --chart-5: #f44336;        /* Red - from tokens.json */
+  --chart-6: #ffc107;        /* Amber - from tokens.json */
+  --chart-7: #00bcd4;        /* Cyan - from tokens.json */
+  --chart-8: #673ab7;        /* Deep Purple - from tokens.json */
+  
+  /* Semantic Alert Colors - Mapped from tokens.json alert palettes */
+  --success: #4caf50;         /* Green from basic-color-palette */
+  --success-foreground: #ffffff;
+  --info: #03a9f4;           /* Light Blue from basic-color-palette */
+  --info-foreground: #ffffff;
+  --warning: #ff9800;        /* Orange from basic-color-palette */
+  --warning-foreground: #ffffff;
+  --error: #f44336;          /* Red from basic-color-palette */
+  --error-foreground: #ffffff;
+  
+  /* Chart Color Light Variations - Derived from tokens.json colors */
+  --chart-1-light: #4fc3f7;
+  --chart-2-light: #81c784;
+  --chart-3-light: #ffb74d;
+  --chart-4-light: #ba68c8;
+  --chart-5-light: #ef5350;
+  --chart-6-light: #ffeb3b;
+  --chart-7-light: #4dd0e1;
+  --chart-8-light: #9575cd;
+  
+  /* Chart Color Dark Variations - Derived from tokens.json colors */
+  --chart-1-dark: #0288d1;
+  --chart-2-dark: #388e3c;
+  --chart-3-dark: #f57c00;
+  --chart-4-dark: #7b1fa2;
+  --chart-5-dark: #d32f2f;
+  --chart-6-dark: #ffa000;
+  --chart-7-dark: #0097a7;
+  --chart-8-dark: #512da8;
+  
+  /* Gradient Color Stops - Based on tokens.json colors */
+  --gradient-1-start: #03a9f4;
+  --gradient-1-mid: #4fc3f7;
+  --gradient-1-end: #81d4fa;
+  
+  --gradient-2-start: #4caf50;
+  --gradient-2-mid: #81c784;
+  --gradient-2-end: #a5d6a7;
+  
+  --gradient-3-start: #ff9800;
+  --gradient-3-mid: #ffb74d;
+  --gradient-3-end: #ffcc02;
+  
+  --gradient-4-start: #9c27b0;
+  --gradient-4-mid: #ba68c8;
+  --gradient-4-end: #ce93d8;
+  
+  --gradient-5-start: #f44336;
+  --gradient-5-mid: #ef5350;
+  --gradient-5-end: #e57373;
+  
+  /* Alert Colors */
+  --alert-info-bg: #E1F5FE;
+  --alert-info-text: #0277BD;
+  --alert-success-bg: #DBEFDC;
+  --alert-success-text: #285B2A;
+  --alert-warning-bg: #FFEACC;
+  --alert-warning-text: #854F00;
+  --alert-error-bg: #FDD9D7;
+  --alert-error-text: #7F231C;
+  
+  --radius: 2px;
+  --sidebar: #F2F6F8;
+  --sidebar-foreground: rgba(0, 0, 0, 0.87);
+  --sidebar-primary: #03A9F4;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #E4EAEE;
+  --sidebar-accent-foreground: rgba(0, 0, 0, 0.87);
+  --sidebar-border: #C6D2D9;
+  --sidebar-ring: #03A9F4;
+}
+
+.dark {
+  /* Clockify Dark Mode Colors */
+  --background: #263238;
+  --foreground: rgba(255, 255, 255, 0.87);
+  --card: #263238;
+  --card-foreground: rgba(255, 255, 255, 0.87);
+  --popover: #263238;
+  --popover-foreground: rgba(255, 255, 255, 0.87);
+  --primary: #03A9F4;
+  --primary-foreground: #FFFFFF;
+  --primary-hover: #0288D1;
+  --secondary: #12191D;
+  --secondary-foreground: rgba(255, 255, 255, 0.87);
+  --muted: #37474F;
+  --muted-foreground: rgba(255, 255, 255, 0.54);
+  --accent: #37474F;
+  --accent-foreground: rgba(255, 255, 255, 0.87);
+  --destructive: #F44336;
+  --destructive-foreground: #FFFFFF;
+  --border: #37474F;
+  --input: #37474F;
+  --input-background: #37474F;
+  --switch-background: #90A4AE;
+  --ring: #03A9F4;
+  
+  /* Chart Colors - Dark Mode - Using tokens.json equivalents */
+  --chart-1: #03a9f4;        /* Light Blue - same as tokens.json (works well in dark) */
+  --chart-2: #8bc34a;        /* Light Green - from tokens.json */
+  --chart-3: #ff9800;        /* Orange - from tokens.json */
+  --chart-4: #9c27b0;        /* Purple - from tokens.json */
+  --chart-5: #f44336;        /* Red - from tokens.json */
+  --chart-6: #ffc107;        /* Amber - from tokens.json */
+  --chart-7: #00bcd4;        /* Cyan - from tokens.json */
+  --chart-8: #673ab7;        /* Deep Purple - from tokens.json */
+  
+  /* Semantic Alert Colors - Dark Mode - Adjusted for dark background */
+  --success: #8bc34a;         /* Light Green from basic-color-palette */
+  --success-foreground: #000000;
+  --info: #03a9f4;           /* Light Blue from basic-color-palette */
+  --info-foreground: #000000;
+  --warning: #ffc107;        /* Amber from basic-color-palette (better contrast) */
+  --warning-foreground: #000000;
+  --error: #f44336;          /* Red from basic-color-palette */
+  --error-foreground: #ffffff;
+  --chart-6: #ffc107;        /* Amber - from tokens.json */
+  --chart-7: #00bcd4;        /* Cyan - from tokens.json */
+  --chart-8: #673ab7;        /* Deep Purple - from tokens.json */
+  
+  /* Chart Color Light Variations - Dark Mode - Derived from tokens.json */
+  --chart-1-light: #4fc3f7;
+  --chart-2-light: #aed581;
+  --chart-3-light: #ffb74d;
+  --chart-4-light: #ba68c8;
+  --chart-5-light: #ef5350;
+  --chart-6-light: #ffeb3b;
+  --chart-7-light: #4dd0e1;
+  --chart-8-light: #9575cd;
+  
+  /* Chart Color Dark Variations - Dark Mode - Derived from tokens.json */
+  --chart-1-dark: #0288d1;
+  --chart-2-dark: #689f38;
+  --chart-3-dark: #f57c00;
+  --chart-4-dark: #7b1fa2;
+  --chart-5-dark: #d32f2f;
+  --chart-6-dark: #ffa000;
+  --chart-7-dark: #0097a7;
+  --chart-8-dark: #512da8;
+  
+  /* Gradient Color Stops - Dark Mode - Based on tokens.json colors */
+  --gradient-1-start: #03a9f4;
+  --gradient-1-mid: #4fc3f7;
+  --gradient-1-end: #81d4fa;
+  
+  --gradient-2-start: #8bc34a;
+  --gradient-2-mid: #aed581;
+  --gradient-2-end: #c8e6c9;
+  
+  --gradient-3-start: #ff9800;
+  --gradient-3-mid: #ffb74d;
+  --gradient-3-end: #ffcc02;
+  
+  --gradient-4-start: #9c27b0;
+  --gradient-4-mid: #ba68c8;
+  --gradient-4-end: #ce93d8;
+  
+  --gradient-5-start: #f44336;
+  --gradient-5-mid: #ef5350;
+  --gradient-5-end: #e57373;
+  
+  /* Alert Colors - Dark Mode */
+  --alert-info-bg: rgba(225, 245, 254, 0.1);
+  --alert-info-text: #03A9F4;
+  --alert-success-bg: rgba(219, 239, 220, 0.1);
+  --alert-success-text: #8BC34A;
+  --alert-warning-bg: rgba(255, 234, 204, 0.1);
+  --alert-warning-text: #FF9800;
+  --alert-error-bg: rgba(253, 217, 215, 0.1);
+  --alert-error-text: #F44336;
+  
+  --sidebar: #12191D;
+  --sidebar-foreground: rgba(255, 255, 255, 0.87);
+  --sidebar-primary: #03A9F4;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #37474F;
+  --sidebar-accent-foreground: rgba(255, 255, 255, 0.87);
+  --sidebar-border: #37474F;
+  --sidebar-ring: #03A9F4;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  
+  /* Enhanced Chart Colors */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7);
+  --color-chart-8: var(--chart-8);
+  
+  /* Chart Color Light Variations */
+  --color-chart-1-light: var(--chart-1-light);
+  --color-chart-2-light: var(--chart-2-light);
+  --color-chart-3-light: var(--chart-3-light);
+  --color-chart-4-light: var(--chart-4-light);
+  --color-chart-5-light: var(--chart-5-light);
+  --color-chart-6-light: var(--chart-6-light);
+  --color-chart-7-light: var(--chart-7-light);
+  --color-chart-8-light: var(--chart-8-light);
+  
+  /* Chart Color Dark Variations */
+  --color-chart-1-dark: var(--chart-1-dark);
+  --color-chart-2-dark: var(--chart-2-dark);
+  --color-chart-3-dark: var(--chart-3-dark);
+  --color-chart-4-dark: var(--chart-4-dark);
+  --color-chart-5-dark: var(--chart-5-dark);
+  --color-chart-6-dark: var(--chart-6-dark);
+  --color-chart-7-dark: var(--chart-7-dark);
+  --color-chart-8-dark: var(--chart-8-dark);
+  
+  /* Gradient Colors */
+  --color-gradient-1-start: var(--gradient-1-start);
+  --color-gradient-1-mid: var(--gradient-1-mid);
+  --color-gradient-1-end: var(--gradient-1-end);
+  --color-gradient-2-start: var(--gradient-2-start);
+  --color-gradient-2-mid: var(--gradient-2-mid);
+  --color-gradient-2-end: var(--gradient-2-end);
+  --color-gradient-3-start: var(--gradient-3-start);
+  --color-gradient-3-mid: var(--gradient-3-mid);
+  --color-gradient-3-end: var(--gradient-3-end);
+  --color-gradient-4-start: var(--gradient-4-start);
+  --color-gradient-4-mid: var(--gradient-4-mid);
+  --color-gradient-4-end: var(--gradient-4-end);
+  --color-gradient-5-start: var(--gradient-5-start);
+  --color-gradient-5-mid: var(--gradient-5-mid);
+  --color-gradient-5-end: var(--gradient-5-end);
+  
+  /* Sidebar Colors */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Radii */
+  --radius-sm: 1px;
+  --radius-md: 2px;
+  --radius-lg: 4px;
+  --radius-xl: 8px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+}
+
+/**
+ * Clockify Typography System
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    /* Hero Title - 24px */
+    h1 {
+      font-size: 24px;
+      font-weight: var(--font-weight-normal);
+      line-height: 34px;
+    }
+
+    /* Heading 2 - 18px */
+    h2 {
+      font-size: 18px;
+      font-weight: var(--font-weight-medium);
+      line-height: 27px;
+    }
+
+    /* Body Text - 14px */
+    h3, h4 {
+      font-size: 14px;
+      font-weight: var(--font-weight-medium);
+      line-height: 21px;
+    }
+
+    /* Body Text 1 - 14px */
+    p {
+      font-size: 14px;
+      font-weight: var(--font-weight-normal);
+      line-height: 21px;
+    }
+
+    /* Label Text - 14px */
+    label {
+      font-size: 14px;
+      font-weight: var(--font-weight-normal);
+      line-height: 16px;
+    }
+
+    /* Button Text - 14px Uppercase */
+    button {
+      font-size: 14px;
+      font-weight: var(--font-weight-normal);
+      line-height: 16px;
+      text-transform: uppercase;
+    }
+
+    /* Input Text - 14px */
+    input, textarea, select {
+      font-size: 14px;
+      font-weight: var(--font-weight-normal);
+      line-height: 21px;
+    }
+
+    /* Caption Text - 12px */
+    small {
+      font-size: 12px;
+      font-weight: var(--font-weight-normal);
+      line-height: 18px;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+/* Custom utilities */
+@layer utilities {
+  .text-caption {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+  
+  /* Grid Layout Utilities */
+  .grid-background {
+    background-image: 
+      linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
+  }
+  
+  .grid-background-prominent {
+    background-image: 
+      linear-gradient(to right, hsl(var(--border)) 2px, transparent 2px),
+      linear-gradient(to bottom, hsl(var(--border)) 2px, transparent 2px);
+  }
+  
+  .grid-overlay {
+    position: relative;
+  }
+  
+  .grid-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background-image: 
+      linear-gradient(to right, hsl(var(--primary) / 0.3) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--primary) / 0.3) 1px, transparent 1px);
+    background-size: var(--grid-cell-size, 80px) var(--grid-cell-size, 80px);
+    background-position: var(--grid-offset-x, 0px) var(--grid-offset-y, 0px);
+  }
+  
+  .grid-dots {
+    background-image: radial-gradient(circle, hsl(var(--primary) / 0.4) 1px, transparent 1px);
+  }
+}

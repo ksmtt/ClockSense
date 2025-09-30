@@ -1,0 +1,155 @@
+{
+  "key": "clockify-contract-hours-tracker",
+  "name": "Contract Hours Tracker",
+  "description": "Advanced time tracking addon that compares actual hours worked against contracted hours with multi-contract support, overtime analysis, trend tracking, and automated notifications for students and flexible workers.",
+  "baseUrl": "https://YOUR_GITHUB_USERNAME.github.io/clockify-contract-hours-tracker/",
+  "iconPath": "/icon.png",
+  "minimalSubscriptionPlan": "FREE",
+  "components": [
+    {
+      "type": "sidebar",
+      "label": "Contract Hours Tracker",
+      "accessLevel": "EVERYONE",
+      "path": "/index.html",
+      "iconPath": "/icon.png"
+    }
+  ],
+  "settings": {
+    "tabs": [
+      {
+        "id": "contracts_tab",
+        "name": "Contract Management",
+        "header": {
+          "title": "Manage Work Contracts"
+        },
+        "groups": [
+          {
+            "id": "contracts_group",
+            "title": "Contract Configuration",
+            "description": "Store and manage multiple work contracts with different hourly commitments and date ranges",
+            "header": {
+              "title": "Contract Settings"
+            },
+            "settings": [
+              {
+                "id": "contracts_data",
+                "name": "Contracts Data",
+                "description": "JSON data containing all contract configurations with weekly hours, start/end dates, and contract names",
+                "placeholder": "Contract data will be automatically managed by the addon...",
+                "type": "TXT",
+                "value": "[]",
+                "required": false,
+                "copyable": false,
+                "readOnly": true,
+                "accessLevel": "EVERYONE"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "notifications_tab",
+        "name": "Notifications & Alerts",
+        "header": {
+          "title": "Notification Preferences"
+        },
+        "groups": [
+          {
+            "id": "alerts_group",
+            "title": "Alert Configuration",
+            "description": "Configure when and how you receive notifications about contract hours, overtime, and contract endings",
+            "header": {
+              "title": "Alert Settings"
+            },
+            "settings": [
+              {
+                "id": "notification_settings",
+                "name": "Notification Preferences",
+                "description": "JSON configuration for weekly notifications, contract ending alerts, and overtime thresholds",
+                "placeholder": "Notification settings managed by addon...",
+                "type": "TXT",
+                "value": "{\"weeklyNotifications\": true, \"contractEndingNotifications\": true, \"contractEndingAdvanceWeeks\": 2, \"overtimeThreshold\": 5}",
+                "required": false,
+                "copyable": false,
+                "readOnly": true,
+                "accessLevel": "EVERYONE"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "api_tab",
+        "name": "API Configuration",
+        "header": {
+          "title": "Clockify API Settings"
+        },
+        "groups": [
+          {
+            "id": "api_group",
+            "title": "API Integration",
+            "description": "Configure Clockify API access for real-time data synchronization",
+            "header": {
+              "title": "API Settings"
+            },
+            "settings": [
+              {
+                "id": "clockify_api_settings",
+                "name": "API Configuration",
+                "description": "Clockify API settings including API key, workspace ID, and user ID for data synchronization",
+                "placeholder": "API settings configured through the addon interface...",
+                "type": "TXT",
+                "value": "{\"useClockifyApi\": false, \"apiKey\": \"\", \"workspaceId\": \"\", \"userId\": \"\"}",
+                "required": false,
+                "copyable": true,
+                "readOnly": false,
+                "accessLevel": "EVERYONE"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "data_tab",
+        "name": "Data Management",
+        "header": {
+          "title": "Data Storage & Backup"
+        },
+        "groups": [
+          {
+            "id": "data_group",
+            "title": "Data Storage",
+            "description": "Manage application data storage and backup functionality",
+            "header": {
+              "title": "Data Settings"
+            },
+            "settings": [
+              {
+                "id": "app_data_backup",
+                "name": "Application Data Backup",
+                "description": "Complete backup of all application data including contracts, settings, and cached time entries for export/import functionality",
+                "placeholder": "Backup data managed automatically...",
+                "type": "TXT",
+                "value": "{}",
+                "required": false,
+                "copyable": true,
+                "readOnly": false,
+                "accessLevel": "EVERYONE"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "scopes": [
+    "TIME_ENTRY_READ",
+    "USER_READ", 
+    "TAG_READ",
+    "REPORTS_READ",
+    "PROJECT_READ",
+    "WORKSPACE_READ",
+    "WORKSPACE_SETTINGS_READ",
+    "WORKSPACE_SETTINGS_UPDATE"
+  ]
+}
