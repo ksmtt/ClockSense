@@ -1,6 +1,6 @@
 {
   "key": "clockify-contract-hours-tracker",
-  "name": "Contract Hours Tracker",
+  "name": "ClockSense - Contract Hours Tracker",
   "description": "Advanced time tracking addon that compares actual hours worked against contracted hours with multi-contract support, overtime analysis, trend tracking, and automated notifications for students and flexible workers.",
   "baseUrl": "https://ksmtt.github.io/ClockSense/",
   "iconPath": "/icon.png",
