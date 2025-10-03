@@ -22,7 +22,7 @@
         "groups": [
           {
             "id": "contracts_group",
-            "label": "Contract Configuration",
+            "title": "Contract Configuration",
             "description": "Managed contract definitions with hours and dates.",
             "settings": [
               {
@@ -46,7 +46,7 @@
         "groups": [
           {
             "id": "alerts_group",
-            "label": "Alert Configuration",
+            "title": "Alert Configuration",
             "description": "Notification preferences for endings / overtime.",
             "settings": [
               {
@@ -70,7 +70,7 @@
         "groups": [
           {
             "id": "api_group",
-            "label": "API Integration",
+            "title": "API Integration",
             "description": "Clockify API credentials & usage flag.",
             "settings": [
               {
@@ -94,7 +94,7 @@
         "groups": [
           {
             "id": "data_group",
-            "label": "Data Storage",
+            "title": "Data Storage",
             "description": "Export / import state snapshot.",
             "settings": [
               {
