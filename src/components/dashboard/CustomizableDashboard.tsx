@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
 import { LayoutGrid, Plus, Settings as SettingsIcon, RotateCcw, ArrowUp, ArrowDown } from 'lucide-react';
 import { QuickStatsWidget } from './widgets/QuickStatsWidget';
@@ -21,7 +21,7 @@ interface CustomizableDashboardProps {
 export function CustomizableDashboard({
   currentContract,
   timeEntries,
-  originalTimeEntries,
+  originalTimeEntries: _originalTimeEntries,
   settings,
   layoutConfig,
   onLayoutChange

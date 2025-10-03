@@ -3,7 +3,7 @@ import { Button } from '../ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
 import { Badge } from '../ui/badge';
-import { LayoutGrid, Plus, Settings as SettingsIcon, RotateCcw, Maximize2, Minimize2, Edit3, Save, X, Grid3X3 } from 'lucide-react';
+import { LayoutGrid, Plus, Settings as SettingsIcon, RotateCcw, Edit3, Save, X } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Label } from '../ui/label';
 import { ChartLegend } from './ChartLegend';
@@ -19,7 +19,7 @@ import { PerformanceLegendWidget } from './widgets/PerformanceLegendWidget';
 import { WeeklyTrendWidget } from './widgets/WeeklyTrendWidget';
 import { ContractTimelineWidget } from './widgets/ContractTimelineWidget';
 import { BreakTimeAnalysisWidget } from './widgets/BreakTimeAnalysisWidget';
-import { Contract, TimeEntry, AppSettings, DashboardLayoutConfig } from '../../hooks/useClockifyData';
+import { Contract, TimeEntry, AppSettings, DashboardLayoutConfig, defaultSettings } from '../../hooks/useClockifyData';
 
 interface GridItem {
   id: string;
@@ -36,7 +36,7 @@ interface GridDashboardProps {
   timeEntries: TimeEntry[];
   originalTimeEntries?: TimeEntry[];
   settings: AppSettings;
-  layoutConfig: DashboardLayoutConfig;
+  layoutConfig?: DashboardLayoutConfig;
   onLayoutChange: (config: DashboardLayoutConfig) => void;
 }
 
@@ -126,11 +126,31 @@ const WIDGET_TYPES = {
 export function GridDashboard({
   currentContract,
   timeEntries,
-  originalTimeEntries,
+  originalTimeEntries: _originalTimeEntries,
   settings,
-  layoutConfig,
+  layoutConfig: incomingLayoutConfig,
   onLayoutChange
 }: GridDashboardProps) {
+  const layoutConfig = useMemo<DashboardLayoutConfig>(() => {
+    const baseConfig = incomingLayoutConfig ?? defaultSettings.dashboardLayout;
+    const requestedGridSize = baseConfig.gridSize;
+    const hasPreset = typeof requestedGridSize === 'string' && GRID_PRESETS[requestedGridSize as keyof typeof GRID_PRESETS];
+    const resolvedGridSize =
+      (hasPreset ? requestedGridSize : defaultSettings.dashboardLayout.gridSize) ?? DEFAULT_GRID_SIZE;
+    const preset = GRID_PRESETS[resolvedGridSize as keyof typeof GRID_PRESETS] ?? GRID_PRESETS[DEFAULT_GRID_SIZE];
+    const widgets = Array.isArray(baseConfig.widgets)
+      ? baseConfig.widgets
+      : defaultSettings.dashboardLayout.widgets;
+
+    return {
+      ...baseConfig,
+      layout: baseConfig.layout ?? defaultSettings.dashboardLayout.layout,
+      columns: baseConfig.columns ?? preset.cols,
+      gridSize: resolvedGridSize,
+      widgets
+    };
+  }, [incomingLayoutConfig]);
+
   const [configDialogOpen, setConfigDialogOpen] = useState(false);
   const [dragItem, setDragItem] = useState<GridItem | null>(null);
   const [resizeItem, setResizeItem] = useState<GridItem | null>(null);
@@ -138,12 +158,18 @@ export function GridDashboard({
   const [isResizing, setIsResizing] = useState(false);
   const [layoutMode, setLayoutMode] = useState(false);
   const [configuringWidget, setConfiguringWidget] = useState<GridItem | null>(null);
-  const [gridSize, setGridSize] = useState(layoutConfig.gridSize || DEFAULT_GRID_SIZE);
+  const [gridSize, setGridSize] = useState(() => layoutConfig.gridSize || DEFAULT_GRID_SIZE);
   const [containerDimensions, setContainerDimensions] = useState({ width: 0, height: 0 });
   const gridRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    if (layoutConfig.gridSize && layoutConfig.gridSize !== gridSize) {
+      setGridSize(layoutConfig.gridSize);
+    }
+  }, [layoutConfig.gridSize, gridSize]);
+
   // Calculate dynamic grid dimensions and cell sizes
-  const { cols: GRID_COLS, rows: GRID_ROWS } = GRID_PRESETS[gridSize] || GRID_PRESETS[DEFAULT_GRID_SIZE];
+  const { cols: GRID_COLS, rows: GRID_ROWS } = GRID_PRESETS[gridSize as keyof typeof GRID_PRESETS] || GRID_PRESETS[DEFAULT_GRID_SIZE as keyof typeof GRID_PRESETS];
   
   const CELL_SIZE = useMemo(() => {
     if (!containerDimensions.width || !containerDimensions.height) return MIN_CELL_SIZE;
@@ -202,8 +228,8 @@ export function GridDashboard({
       type: widget.type,
       x: widget.settings?.gridPosition?.x || 0,
       y: widget.settings?.gridPosition?.y || 0,
-      width: widget.settings?.gridPosition?.width || WIDGET_TYPES[widget.type]?.defaultSize.width || 4,
-      height: widget.settings?.gridPosition?.height || WIDGET_TYPES[widget.type]?.defaultSize.height || 3,
+      width: widget.settings?.gridPosition?.width || WIDGET_TYPES[widget.type as keyof typeof WIDGET_TYPES]?.defaultSize.width || 4,
+      height: widget.settings?.gridPosition?.height || WIDGET_TYPES[widget.type as keyof typeof WIDGET_TYPES]?.defaultSize.height || 3,
       settings: widget.settings
     }));
 
@@ -243,7 +269,7 @@ export function GridDashboard({
     
     // Optionally, you could also validate and adjust widget positions here
     // to ensure they fit within the new grid bounds
-    const { cols, rows } = GRID_PRESETS[newGridSize];
+    const { cols, rows } = GRID_PRESETS[newGridSize as keyof typeof GRID_PRESETS];
     const adjustedWidgets = layoutConfig.widgets.map(widget => {
       const gridPos = widget.settings?.gridPosition;
       if (!gridPos) return widget;
@@ -271,7 +297,7 @@ export function GridDashboard({
   };
 
   const addWidget = (type: string, position?: { x: number; y: number }, config?: Record<string, any>) => {
-    const widgetConfig = WIDGET_TYPES[type];
+    const widgetConfig = WIDGET_TYPES[type as keyof typeof WIDGET_TYPES];
     if (!widgetConfig) return;
 
     // Find available position
@@ -422,7 +448,7 @@ export function GridDashboard({
       updateGridItem(dragItem.id, { x: newX, y: newY });
     } else if (resizeItem && isResizing) {
       const position = getGridPosition(e.clientX, e.clientY);
-      const widgetType = WIDGET_TYPES[resizeItem.type];
+      const widgetType = WIDGET_TYPES[resizeItem.type as keyof typeof WIDGET_TYPES];
       
       const newWidth = Math.max(
         widgetType?.minSize.width || 2,
@@ -484,9 +510,6 @@ export function GridDashboard({
           <TotalHoursWidget 
             {...baseProps} 
             size={{ width: item.width, height: item.height }}
-            showDetails={item.settings?.showDetails ?? false}
-            showTrend={item.settings?.showTrend ?? true}
-            timePeriod={item.settings?.timePeriod || 'current'}
           />
         );
         break;
@@ -495,9 +518,6 @@ export function GridDashboard({
           <ThisWeekWidget 
             {...baseProps} 
             size={{ width: item.width, height: item.height }}
-            showProgress={item.settings?.showProgress ?? true}
-            showTarget={item.settings?.showTarget ?? true}
-            showRemaining={item.settings?.showRemaining ?? false}
           />
         );
         break;
@@ -506,9 +526,6 @@ export function GridDashboard({
           <ContractProgressWidget 
             {...baseProps} 
             size={{ width: item.width, height: item.height }}
-            showTimeRemaining={item.settings?.showTimeRemaining ?? true}
-            showEndDate={item.settings?.showEndDate ?? true}
-            progressType={item.settings?.progressType || 'time'}
           />
         );
         break;
@@ -517,9 +534,6 @@ export function GridDashboard({
           <OvertimeWidget 
             {...baseProps} 
             size={{ width: item.width, height: item.height }}
-            alertThreshold={item.settings?.alertThreshold || 5}
-            showWeekly={item.settings?.showWeekly ?? true}
-            showMonthly={item.settings?.showMonthly ?? false}
           />
         );
         break;
@@ -530,8 +544,6 @@ export function GridDashboard({
             size={{ width: item.width, height: item.height }} 
             timeRange={item.settings?.timeRange || 7} 
             showWeekends={item.settings?.showWeekends ?? true}
-            chartType={item.settings?.chartType || 'bar'}
-            showTargetLine={item.settings?.showTargetLine ?? false}
           />
         );
         break;
@@ -539,11 +551,7 @@ export function GridDashboard({
         widget = (
           <HoursDistributionWidget 
             {...baseProps} 
-            size={{ width: item.width, height: item.height }} 
-            showLegend={item.settings?.showLegend ?? true}
-            showPercentages={item.settings?.showPercentages ?? true}
-            chartType={item.settings?.chartType || 'pie'}
-            groupBy={item.settings?.groupBy || 'day'}
+            size={{ width: item.width, height: item.height }}
           />
         );
         break;
@@ -551,10 +559,7 @@ export function GridDashboard({
         widget = (
           <PerformanceLegendWidget 
             {...baseProps} 
-            size={{ width: item.width, height: item.height }} 
-            showBreakTimeInfo={item.settings?.showBreakTimeInfo ?? true}
-            showColorCoding={item.settings?.showColorCoding ?? true}
-            compactMode={item.settings?.compactMode ?? false}
+            size={{ width: item.width, height: item.height }}
           />
         );
         break;
@@ -563,9 +568,6 @@ export function GridDashboard({
           <WeeklyTrendWidget 
             {...baseProps} 
             size={{ width: item.width, height: item.height }}
-            weekCount={item.settings?.weekCount || 8}
-            showAverage={item.settings?.showAverage ?? true}
-            showTarget={item.settings?.showTarget ?? false}
           />
         );
         break;
@@ -573,9 +575,6 @@ export function GridDashboard({
         widget = (
           <ContractTimelineWidget 
             {...baseProps}
-            showMilestones={item.settings?.showMilestones ?? true}
-            showProgress={item.settings?.showProgress ?? true}
-            timelineView={item.settings?.timelineView || 'all'}
           />
         );
         break;
@@ -583,8 +582,6 @@ export function GridDashboard({
         widget = (
           <BreakTimeAnalysisWidget 
             {...baseProps}
-            analysisPeriod={item.settings?.analysisPeriod || 'week'}
-            showRecommendations={item.settings?.showRecommendations ?? true}
           />
         );
         break;
@@ -825,7 +822,7 @@ export function GridDashboard({
               <div className="flex items-center gap-2">
                 <Label htmlFor="grid-size-select" className="text-sm">Grid:</Label>
                 <Select value={gridSize} onValueChange={handleGridSizeChange}>
-                  <SelectTrigger id="grid-size-select" className="w-24">
+                  <SelectTrigger id="grid-size-select" className="w-24" aria-label="Select grid size" title="Select grid size">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -847,7 +844,7 @@ export function GridDashboard({
               <div className="flex items-center gap-2">
                 <Label htmlFor="grid-size-select-edit" className="text-sm">Grid:</Label>
                 <Select value={gridSize} onValueChange={handleGridSizeChange}>
-                  <SelectTrigger id="grid-size-select-edit" className="w-24">
+                  <SelectTrigger id="grid-size-select-edit" className="w-24" aria-label="Select grid size" title="Select grid size">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>

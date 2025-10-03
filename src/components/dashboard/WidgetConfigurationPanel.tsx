@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Label } from '../ui/label';
@@ -28,8 +27,6 @@ export function WidgetConfigurationPanel({
   onClose, 
   isVisible 
 }: WidgetConfigurationPanelProps) {
-  const currentSettings = widget.settings || {};
-
   const updateSetting = (key: string, value: any) => {
     onUpdateConfig(widget.id, {
       ...(widget.settings || {}),
@@ -66,7 +63,7 @@ export function WidgetConfigurationPanel({
                 value={(widget.settings || {}).timePeriod || 'current'} 
                 onValueChange={(value) => updateSetting('timePeriod', value)}
               >
-                <SelectTrigger>
+                <SelectTrigger aria-label="Select time period" title="Select time period">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -159,7 +156,7 @@ export function WidgetConfigurationPanel({
                 value={(widget.settings || {}).chartType || 'bar'} 
                 onValueChange={(value) => updateSetting('chartType', value)}
               >
-                <SelectTrigger>
+                <SelectTrigger aria-label="Select chart type" title="Select chart type">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -208,7 +205,7 @@ export function WidgetConfigurationPanel({
                 value={(widget.settings || {}).chartType || 'pie'} 
                 onValueChange={(value) => updateSetting('chartType', value)}
               >
-                <SelectTrigger>
+                <SelectTrigger aria-label="Select chart type" title="Select chart type">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -240,7 +237,7 @@ export function WidgetConfigurationPanel({
                 value={(widget.settings || {}).groupBy || 'day'} 
                 onValueChange={(value) => updateSetting('groupBy', value)}
               >
-                <SelectTrigger>
+                <SelectTrigger aria-label="Select grouping option" title="Select grouping option">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -323,7 +320,7 @@ export function WidgetConfigurationPanel({
                 value={(widget.settings || {}).progressType || 'time'} 
                 onValueChange={(value) => updateSetting('progressType', value)}
               >
-                <SelectTrigger>
+                <SelectTrigger aria-label="Select progress calculation method" title="Select progress calculation method">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -419,7 +416,7 @@ export function WidgetConfigurationPanel({
                 value={(widget.settings || {}).analysisPeriod || 'week'} 
                 onValueChange={(value) => updateSetting('analysisPeriod', value)}
               >
-                <SelectTrigger>
+                <SelectTrigger aria-label="Select analysis period" title="Select analysis period">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -469,7 +466,7 @@ export function WidgetConfigurationPanel({
                 value={(widget.settings || {}).timelineView || 'all'} 
                 onValueChange={(value) => updateSetting('timelineView', value)}
               >
-                <SelectTrigger>
+                <SelectTrigger aria-label="Select timeline view" title="Select timeline view">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -518,7 +515,7 @@ export function WidgetConfigurationPanel({
       contractTimeline: 'Contract Timeline',
       breakTimeAnalysis: 'Break Time Analysis'
     };
-    return names[widget.type] || 'Widget';
+    return names[widget.type as keyof typeof names] || 'Widget';
   };
 
   return (

@@ -238,6 +238,8 @@ export function ClockifySettings({
                       size="sm"
                       className="absolute right-0 top-0 h-full px-3"
                       onClick={() => setShowApiKey(!showApiKey)}
+                      aria-label={showApiKey ? "Hide API key" : "Show API key"}
+                      title={showApiKey ? "Hide API key" : "Show API key"}
                     >
                       {showApiKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </Button>

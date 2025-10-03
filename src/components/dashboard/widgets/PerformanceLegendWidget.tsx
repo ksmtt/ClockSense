@@ -1,5 +1,4 @@
 import { Info } from 'lucide-react';
-import { DashboardWidget } from '../DashboardWidget';
 import { AppSettings } from '../../../hooks/useClockifyData';
 
 interface PerformanceLegendWidgetProps {
@@ -15,14 +14,14 @@ interface PerformanceLegendWidgetProps {
 }
 
 export function PerformanceLegendWidget({
-  id,
+  id: _id,
   settings,
-  isDragging = false,
+  isDragging: _isDragging = false,
   size = 'medium',
-  onSettings,
-  onRemove,
-  onResize,
-  dragHandleProps,
+  onSettings: _onSettings,
+  onRemove: _onRemove,
+  onResize: _onResize,
+  dragHandleProps: _dragHandleProps,
   showBreakTimeInfo = true
 }: PerformanceLegendWidgetProps) {
   const isCompact = size === 'compact';

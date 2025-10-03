@@ -1,6 +1,6 @@
 import { TrendingUp } from 'lucide-react';
 import { ChartContainer, ChartTooltip } from '../../ui/chart';
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, ReferenceLine } from 'recharts';
 import { Contract, TimeEntry, AppSettings } from '../../../hooks/useClockifyData';
 import { useMemo } from 'react';
 import { CHART_COLORS, STANDARD_CHART_CONFIG } from '../../../constants/chartColors';
@@ -15,17 +15,28 @@ interface WeeklyTrendWidgetProps {
 }
 
 export function WeeklyTrendWidget({
-  id,
+  id: _id,
   currentContract,
   timeEntries,
-  settings,
-  onRemove,
+  settings: _settings,
+  onRemove: _onRemove,
   size = { width: 6, height: 4 }
 }: WeeklyTrendWidgetProps) {
   
   // Determine dimensions based on size
   const isCompact = size.width <= 5 || size.height <= 3;
   const isLarge = size.width >= 8 || size.height >= 5;
+  
+  // Calculate chart dimensions
+  const gridCellWidth = 60; // Base cell width in pixels
+  const gridCellHeight = 60; // Base cell height in pixels
+  const padding = 32; // Widget padding
+  const headerHeight = isCompact ? 32 : 64; // Header height
+  
+  const widgetWidth = size.width * gridCellWidth;
+  const widgetHeight = size.height * gridCellHeight;
+  const chartWidth = widgetWidth - padding;
+  const chartHeight = widgetHeight - headerHeight;
   const chartData = useMemo(() => {
     if (!currentContract) return [];
 
@@ -116,8 +127,7 @@ export function WeeklyTrendWidget({
           config={STANDARD_CHART_CONFIG}
           className="h-full w-full"
         >
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={chartData}>
+          <LineChart data={chartData} width={chartWidth} height={chartHeight}>
               <defs>
                 <linearGradient id="actualGradient" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor={CHART_COLORS.ACTUAL_HOURS} stopOpacity={0.8} />
@@ -144,7 +154,7 @@ export function WeeklyTrendWidget({
                 width={isCompact ? 25 : 40}
               />
               <ChartTooltip 
-                content={({ active, payload, label }) => {
+                content={({ active, payload, label: _label }) => {
                   if (active && payload && payload.length) {
                     const data = payload[0].payload;
                     return (
@@ -192,7 +202,6 @@ export function WeeklyTrendWidget({
                 activeDot={{ r: 6, stroke: 'var(--chart-1)', strokeWidth: 2 }}
               />
             </LineChart>
-          </ResponsiveContainer>
         </ChartContainer>
       </div>
     </div>

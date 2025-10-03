@@ -4,10 +4,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Progress } from './ui/progress';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from './ui/chart';
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { ChartContainer, ChartTooltip } from './ui/chart';
+import { BarChart, Bar, XAxis, YAxis, PieChart, Pie, Cell } from 'recharts';
 import { Contract, TimeEntry, AppSettings } from '../hooks/useClockifyData';
-import { TimeEntriesDataView } from './TimeEntriesDataView';
 
 interface DashboardProps {
   currentContract?: Contract;
@@ -16,7 +15,7 @@ interface DashboardProps {
   settings: AppSettings;
 }
 
-export function Dashboard({ currentContract, timeEntries, originalTimeEntries, settings }: DashboardProps) {
+export function Dashboard({ currentContract, timeEntries, originalTimeEntries: _originalTimeEntries, settings }: DashboardProps) {
   const dashboardData = useMemo(() => {
     if (!currentContract) return null;
 
@@ -249,8 +248,7 @@ export function Dashboard({ currentContract, timeEntries, originalTimeEntries, s
               }}
               className="h-[300px]"
             >
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={dashboardData.chartData}>
+              <BarChart data={dashboardData.chartData}>
                   <defs>
                     {/* Enhanced gradients for vibrant bar charts */}
                     <linearGradient id="expectedGradient" x1="0" y1="0" x2="0" y2="1">
@@ -301,7 +299,7 @@ export function Dashboard({ currentContract, timeEntries, originalTimeEntries, s
                               </div>
                               <div className="flex items-center gap-2">
                                 <div className="w-3 h-3 rounded shadow-sm bg-chart-8/70" />
-                                <span className="text-sm">Expected: {expected.toFixed(1)}h</span>
+                                <span className="text-sm">Expected: {Number(expected).toFixed(1)}h</span>
                               </div>
                               {data.isWeekend && (
                                 <p className="text-xs text-muted-foreground mt-1">🏖️ Weekend</p>
@@ -330,7 +328,6 @@ export function Dashboard({ currentContract, timeEntries, originalTimeEntries, s
                     opacity={0.7}
                   />
                 </BarChart>
-              </ResponsiveContainer>
             </ChartContainer>
           </CardContent>
         </Card>
@@ -355,8 +352,7 @@ export function Dashboard({ currentContract, timeEntries, originalTimeEntries, s
               }}
               className="h-[300px]"
             >
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
+              <PieChart>
                   <defs>
                     {/* Enhanced vibrant gradients for pie chart */}
                     <linearGradient id="gradient2" x1="0" y1="0" x2="1" y2="1">
@@ -437,7 +433,6 @@ export function Dashboard({ currentContract, timeEntries, originalTimeEntries, s
                     }}
                   />
                 </PieChart>
-              </ResponsiveContainer>
             </ChartContainer>
             
             {/* Enhanced Legend with vibrant colors */}

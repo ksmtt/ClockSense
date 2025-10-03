@@ -6,7 +6,6 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Switch } from './ui/switch';
-import { Separator } from './ui/separator';
 import { Alert, AlertDescription } from './ui/alert';
 import { Badge } from './ui/badge';
 import { ClockifySettings } from './ClockifySettings';
@@ -146,7 +145,10 @@ export function SettingsPanel({ settings, onUpdateSettings, contracts, clockifyA
                   value={localSettings.notificationTiming.toString()}
                   onValueChange={(value) => handleSettingChange('notificationTiming', parseInt(value))}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger
+                    id="notification-timing"
+                    aria-label="Select contract end notification timing"
+                  >
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -167,7 +169,10 @@ export function SettingsPanel({ settings, onUpdateSettings, contracts, clockifyA
                   value={localSettings.weeklyNotificationDay}
                   onValueChange={(value: any) => handleSettingChange('weeklyNotificationDay', value)}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger
+                    id="weekly-notification"
+                    aria-label="Select weekly notification day"
+                  >
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -307,12 +312,15 @@ export function SettingsPanel({ settings, onUpdateSettings, contracts, clockifyA
                       value={localSettings.breakTimeSettings.noBreakTagId || 'none'}
                       onValueChange={(value) => handleBreakSettingChange('noBreakTagId', value === 'none' ? undefined : value)}
                     >
-                      <SelectTrigger>
+                      <SelectTrigger
+                        id="no-break-tag"
+                        aria-label="Select tag to exclude from break time"
+                      >
                         <SelectValue placeholder={isLoadingTags ? "Loading tags..." : "Select tag"} />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="none">No tag selected</SelectItem>
-                        {clockifyApi?.tags?.map(tag => (
+                        {clockifyApi?.tags?.map((tag: any) => (
                           <SelectItem key={tag.id} value={tag.id}>
                             {tag.name}
                           </SelectItem>
@@ -366,7 +374,10 @@ export function SettingsPanel({ settings, onUpdateSettings, contracts, clockifyA
                 value={localSettings.runningTotalReference}
                 onValueChange={(value: any) => handleSettingChange('runningTotalReference', value)}
               >
-                <SelectTrigger>
+                <SelectTrigger
+                  id="running-total"
+                  aria-label="Select running total reference"
+                >
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -434,6 +445,8 @@ export function SettingsPanel({ settings, onUpdateSettings, contracts, clockifyA
                 type="file"
                 accept=".json"
                 className="hidden"
+                aria-hidden="true"
+                tabIndex={-1}
                 onChange={(e) => {
                   const file = e.target.files?.[0];
                   if (file) {

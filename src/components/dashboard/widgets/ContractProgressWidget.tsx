@@ -1,5 +1,4 @@
 import { TrendingUp } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 import { Progress } from '../../ui/progress';
 import { Contract, TimeEntry, AppSettings } from '../../../hooks/useClockifyData';
 import { useMemo } from 'react';
@@ -14,11 +13,11 @@ interface ContractProgressWidgetProps {
 }
 
 export function ContractProgressWidget({
-  id,
+  id: _id,
   currentContract,
-  timeEntries,
-  settings,
-  onRemove,
+  timeEntries: _timeEntries,
+  settings: _settings,
+  onRemove: _onRemove,
   size = { width: 3, height: 2 }
 }: ContractProgressWidgetProps) {
   const progressData = useMemo(() => {

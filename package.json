@@ -1,11 +1,12 @@
 {
-      "name": "Report Comparison Addon",
+      "name": "clocksense-addon",
       "version": "0.1.0",
       "private": true,
       "dependencies": {
             "@dnd-kit/core": "*",
             "@dnd-kit/sortable": "*",
             "@dnd-kit/utilities": "*",
+            "@fontsource-variable/roboto": "^5.2.8",
             "@radix-ui/react-accordion": "^1.2.3",
             "@radix-ui/react-alert-dialog": "^1.1.6",
             "@radix-ui/react-aspect-ratio": "^1.1.2",
@@ -55,19 +56,24 @@
             "@types/react": "^19.1.15",
             "@types/react-dom": "^19.1.9",
             "@vitejs/plugin-react-swc": "^3.10.2",
+            "concurrently": "^9.2.1",
+            "style-dictionary": "^5.0.4",
             "typescript": "^5.9.2",
             "vite": "6.3.5"
       },
       "scripts": {
-            "dev": "vite",
-            "build": "vite build",
+            "dev": "concurrently \"npm run tokens:build:watch\" \"vite\"",
+            "dev:simple": "npm run tokens:build && vite",
+            "build": "npm run tokens:build && vite build",
             "preview": "vite preview",
             "serve": "vite preview --port 4173",
-            "build:dev": "vite build --mode development",
-            "build:prod": "vite build --mode production",
+            "build:dev": "npm run tokens:build && vite build --mode development",
+            "build:prod": "npm run tokens:build && vite build --mode production",
             "type-check": "tsc --noEmit",
             "lint": "echo 'Linting not configured yet'",
             "clean": "rimraf dist build coverage .vite",
-            "start": "npm run dev"
+            "start": "npm run dev",
+            "tokens:build": "node build-tokens.mjs",
+            "tokens:build:watch": "node build-tokens.mjs --watch"
       }
 }

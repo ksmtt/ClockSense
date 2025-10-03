@@ -9,7 +9,7 @@ export interface Notification {
 }
 
 export function useNotifications(
-  contracts: Contract[],
+  _contracts: Contract[],
   currentContract: Contract | undefined,
   timeEntries: TimeEntry[],
   settings: AppSettings

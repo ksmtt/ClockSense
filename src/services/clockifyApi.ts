@@ -83,7 +83,7 @@ export class ClockifyApiService {
     // Use x-addon-token if available, otherwise fall back to API key
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...options.headers,
+      ...(options.headers as Record<string, string>),
     };
     
     if (this.config.addonToken) {
@@ -190,7 +190,21 @@ export class ClockifyApiService {
   convertTimeEntry(clockifyEntry: ClockifyTimeEntry, projects: ClockifyProject[] = []): {
     id: string;
     date: string;
+    dateObject: Date;
     hours: number;
+    duration: {
+      hours: number;
+      minutes: number;
+      seconds: number;
+      totalMinutes: number;
+      totalSeconds: number;
+    };
+    timeInterval: {
+      start: string;
+      end: string;
+      startTime: Date;
+      endTime: Date;
+    };
     projectName?: string;
     description?: string;
     tags?: string[];
@@ -199,15 +213,27 @@ export class ClockifyApiService {
     
     // Parse duration (PT format like PT1H30M or PT45M)
     const duration = clockifyEntry.timeInterval.duration;
-    const hours = this.parseDuration(duration);
+    const durationDetails = this.parseDurationDetailed(duration);
+    const hours = durationDetails.hours + (durationDetails.minutes / 60) + (durationDetails.seconds / 3600);
     
-    // Extract date from start time
+    // Extract date and create date objects
     const date = clockifyEntry.timeInterval.start.split('T')[0];
+    const dateObject = new Date(date + 'T00:00:00.000Z');
+    const startTime = new Date(clockifyEntry.timeInterval.start);
+    const endTime = new Date(clockifyEntry.timeInterval.end);
     
     return {
       id: clockifyEntry.id,
       date,
+      dateObject,
       hours,
+      duration: durationDetails,
+      timeInterval: {
+        start: clockifyEntry.timeInterval.start,
+        end: clockifyEntry.timeInterval.end,
+        startTime,
+        endTime
+      },
       projectName: project?.name || clockifyEntry.projectName,
       description: clockifyEntry.description,
       tags: clockifyEntry.tags?.map(tag => tag.id) || []
@@ -215,20 +241,48 @@ export class ClockifyApiService {
   }
 
   /**
-   * Parse ISO 8601 duration to hours
+   * Parse ISO 8601 duration to detailed time components
    */
-  private parseDuration(duration: string): number {
-    if (!duration || duration === 'PT0S') return 0;
+  private parseDurationDetailed(duration: string): {
+    hours: number;
+    minutes: number;
+    seconds: number;
+    totalMinutes: number;
+    totalSeconds: number;
+  } {
+    if (!duration || duration === 'PT0S') {
+      return {
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+        totalMinutes: 0,
+        totalSeconds: 0
+      };
+    }
     
     // Parse PT1H30M15S format
     const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?/);
-    if (!match) return 0;
+    if (!match) {
+      return {
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+        totalMinutes: 0,
+        totalSeconds: 0
+      };
+    }
     
     const hours = parseInt(match[1] || '0', 10);
     const minutes = parseInt(match[2] || '0', 10);
-    const seconds = parseFloat(match[3] || '0');
+    const seconds = Math.floor(parseFloat(match[3] || '0'));
     
-    return hours + (minutes / 60) + (seconds / 3600);
+    return {
+      hours,
+      minutes,
+      seconds,
+      totalMinutes: (hours * 60) + minutes + Math.floor(seconds / 60),
+      totalSeconds: (hours * 3600) + (minutes * 60) + seconds
+    };
   }
 
   /**

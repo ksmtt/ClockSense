@@ -9,8 +9,7 @@ import {
   createClockifyApi,
   getClockifyConfig,
   saveClockifyConfig,
-  clearClockifyConfig,
-  isClockifyConfigured
+  clearClockifyConfig
 } from '../services/clockifyApi';
 import { TimeEntry, Contract } from './useClockifyData';
 
@@ -143,9 +142,13 @@ export function useClockifyApi() {
     setState(prev => ({ ...prev, isLoading: true, error: null }));
     
     try {
+      // Convert dates from YYYY-MM-DD format to ISO 8601 format required by Clockify API
+      const startDateISO = new Date(contract.startDate + 'T00:00:00.000Z').toISOString();
+      const endDateISO = new Date(contract.endDate + 'T23:59:59.999Z').toISOString();
+      
       const clockifyEntries = await apiService.getAllTimeEntriesInRange(
-        contract.startDate,
-        contract.endDate
+        startDateISO,
+        endDateISO
       );
       
       const timeEntries = clockifyEntries.map(entry => 

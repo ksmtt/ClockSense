@@ -55,7 +55,13 @@ export const CHART_GRADIENTS = {
 
 // Performance color mapping function
 export const getPerformanceColor = (actualHours: number, expectedHours: number) => {
-  if (expectedHours === 0) return CHART_COLORS.LOW_PERFORMANCE;
+  if (expectedHours === 0) {
+    return {
+      color: CHART_COLORS.LOW_PERFORMANCE,
+      light: CHART_COLORS.LOW_PERFORMANCE_LIGHT,
+      status: 'none'
+    };
+  }
   
   const ratio = actualHours / expectedHours;
   

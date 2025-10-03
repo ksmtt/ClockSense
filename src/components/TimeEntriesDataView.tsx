@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
-import { Calendar, Clock, Filter, Download, Search, Eye } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Calendar, Clock, Download, Search, Eye } from 'lucide-react';
+import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Input } from './ui/input';
@@ -8,7 +8,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
 import { ScrollArea } from './ui/scroll-area';
-import { Separator } from './ui/separator';
 import { TimeEntry, Contract } from '../hooks/useClockifyData';
 
 interface TimeEntriesDataViewProps {
