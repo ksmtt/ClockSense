@@ -2,7 +2,7 @@
   "key": "clocksense-contract-hours-tracker",
   "name": "ClockSense - Contract Hours Tracker",
   "description": "Advanced time tracking addon comparing worked vs contracted hours with multi-contract support, overtime analysis, trends and alerts.",
-  "baseUrl": "https://clock-sense.vercel.app",
+  "baseUrl": "https://ksmtt.github.io/ClockSense/",
   "iconPath": "/icon.png",
   "minimalSubscriptionPlan": "FREE",
   "components": [
