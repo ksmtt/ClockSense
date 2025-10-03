@@ -100,13 +100,6 @@ export function ContractManager({ contracts, currentContract, onUpdateContract, 
     setIsAddingContract(true);
   };
 
-  const isContractActive = (contract: Contract) => {
-    const now = new Date();
-    const start = new Date(contract.startDate);
-    const end = new Date(contract.endDate);
-    return now >= start && now <= end;
-  };
-
   const getContractStatus = (contract: Contract) => {
     const now = new Date();
     const start = new Date(contract.startDate);

@@ -13,8 +13,22 @@ export interface Contract {
 
 export interface TimeEntry {
   id: string;
-  date: string;
-  hours: number;
+  date: string; // YYYY-MM-DD format
+  dateObject: Date; // Full date object for calculations
+  hours: number; // Total hours as decimal (e.g., 1.5 for 1h 30m)
+  duration: {
+    hours: number;
+    minutes: number;
+    seconds: number;
+    totalMinutes: number;
+    totalSeconds: number;
+  };
+  timeInterval: {
+    start: string; // ISO string (e.g., "2024-01-01T09:00:00Z")
+    end: string;   // ISO string (e.g., "2024-01-01T17:30:00Z")
+    startTime: Date; // Date object for start time
+    endTime: Date;   // Date object for end time
+  };
   projectName?: string;
   project?: string; // Alternative project field
   description?: string;
@@ -91,10 +105,42 @@ const generateMockTimeEntries = (): TimeEntry[] => {
     const hours = Math.max(0, baseHours + variation);
     
     if (hours > 0) {
+      const dateStr = date.toISOString().split('T')[0];
+      const dateObject = new Date(date);
+      
+      // Create realistic start/end times
+      const startHour = 9 + Math.floor(Math.random() * 2); // 9-10 AM start
+      const startMinute = Math.floor(Math.random() * 60);
+      const startTime = new Date(date);
+      startTime.setHours(startHour, startMinute, 0, 0);
+      
+      const endTime = new Date(startTime);
+      endTime.setTime(startTime.getTime() + (hours * 3600000)); // Add hours in milliseconds
+      
+      // Calculate duration details
+      const totalMinutes = Math.round(hours * 60);
+      const durationHours = Math.floor(totalMinutes / 60);
+      const durationMinutes = totalMinutes % 60;
+      const totalSeconds = totalMinutes * 60;
+      
       entries.push({
-        id: `entry-${date.toISOString().split('T')[0]}`,
-        date: date.toISOString().split('T')[0],
+        id: `entry-${dateStr}`,
+        date: dateStr,
+        dateObject,
         hours: Math.round(hours * 2) / 2, // Round to nearest 0.5
+        duration: {
+          hours: durationHours,
+          minutes: durationMinutes,
+          seconds: 0,
+          totalMinutes,
+          totalSeconds
+        },
+        timeInterval: {
+          start: startTime.toISOString(),
+          end: endTime.toISOString(),
+          startTime,
+          endTime
+        },
         projectName: 'Development Work',
         description: 'Various development tasks'
       });
@@ -104,7 +150,7 @@ const generateMockTimeEntries = (): TimeEntry[] => {
   return entries;
 };
 
-const defaultSettings: AppSettings = {
+export const defaultSettings: AppSettings = {
   notificationTiming: 2,
   weeklyNotificationDay: 'monday',
   overtimeThreshold: 20,
@@ -195,7 +241,8 @@ const defaultSettings: AppSettings = {
       }
     ],
     layout: 'grid',
-    columns: 12
+    columns: 12,
+    gridSize: '12x12'
   }
 };
 
@@ -261,18 +308,22 @@ export function useClockifyData() {
 
     if (savedSettings) {
       const loadedSettings = JSON.parse(savedSettings);
+      const loadedDashboardLayout = (loadedSettings.dashboardLayout ?? {}) as Partial<DashboardLayoutConfig>;
       // Migrate settings to include break time settings and dashboard layout
       const migratedSettings = {
         ...defaultSettings,
         ...loadedSettings,
         breakTimeSettings: {
           ...defaultSettings.breakTimeSettings,
-          ...loadedSettings.breakTimeSettings
+          ...(loadedSettings.breakTimeSettings ?? {})
         },
         dashboardLayout: {
           ...defaultSettings.dashboardLayout,
-          ...loadedSettings.dashboardLayout,
-          widgets: loadedSettings.dashboardLayout?.widgets || defaultSettings.dashboardLayout.widgets
+          ...loadedDashboardLayout,
+          gridSize: typeof loadedDashboardLayout.gridSize === 'string' ? loadedDashboardLayout.gridSize : defaultSettings.dashboardLayout.gridSize,
+          widgets: Array.isArray(loadedDashboardLayout.widgets) && loadedDashboardLayout.widgets.length > 0
+            ? loadedDashboardLayout.widgets
+            : defaultSettings.dashboardLayout.widgets
         }
       };
       setSettings(migratedSettings);
@@ -282,9 +333,11 @@ export function useClockifyData() {
       }
     }
 
-    if (savedTimeEntries && !savedSettings?.useClockifyApi) {
+    const parsedSettings = savedSettings ? JSON.parse(savedSettings) : null;
+
+    if (savedTimeEntries && !parsedSettings?.useClockifyApi) {
       setTimeEntries(JSON.parse(savedTimeEntries));
-    } else if (!savedSettings?.useClockifyApi) {
+    } else if (!parsedSettings?.useClockifyApi) {
       // Generate mock data if none exists and not using API
       const mockEntries = generateMockTimeEntries();
       setTimeEntries(mockEntries);
@@ -357,8 +410,28 @@ export function useClockifyData() {
       saveToStorage('clockify-contracts', data.contracts);
     }
     if (data.settings) {
-      setSettings(data.settings);
-      saveToStorage('clockify-settings', data.settings);
+      const incomingSettings = data.settings;
+      const incomingDashboardLayout = (incomingSettings.dashboardLayout ?? {}) as Partial<DashboardLayoutConfig>;
+      const mergedSettings: AppSettings = {
+        ...defaultSettings,
+        ...incomingSettings,
+        breakTimeSettings: {
+          ...defaultSettings.breakTimeSettings,
+          ...(incomingSettings.breakTimeSettings ?? {})
+        },
+        dashboardLayout: {
+          ...defaultSettings.dashboardLayout,
+          ...incomingDashboardLayout,
+          gridSize: typeof incomingDashboardLayout.gridSize === 'string'
+            ? incomingDashboardLayout.gridSize
+            : defaultSettings.dashboardLayout.gridSize,
+          widgets: Array.isArray(incomingDashboardLayout.widgets) && incomingDashboardLayout.widgets.length > 0
+            ? incomingDashboardLayout.widgets
+            : defaultSettings.dashboardLayout.widgets
+        }
+      };
+      setSettings(mergedSettings);
+      saveToStorage('clockify-settings', mergedSettings);
     }
   };
 

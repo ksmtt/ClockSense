@@ -24,15 +24,15 @@ interface QuickStatsWidgetProps {
 }
 
 export function QuickStatsWidget({
-  id,
+  id: _id,
   currentContract,
   timeEntries,
-  isDragging = false,
+  isDragging: _isDragging = false,
   size = 'medium',
-  onSettings,
-  onRemove,
-  onResize,
-  dragHandleProps,
+  onSettings: _onSettings,
+  onRemove: _onRemove,
+  onResize: _onResize,
+  dragHandleProps: _dragHandleProps,
   showStats = {
     totalHours: true,
     thisWeek: true,

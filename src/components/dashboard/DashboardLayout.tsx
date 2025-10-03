@@ -4,7 +4,7 @@ import { SortableContext, sortableKeyboardCoordinates, rectSortingStrategy } fro
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Button } from '../ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
 import { LayoutGrid, Plus, Settings as SettingsIcon, RotateCcw } from 'lucide-react';
 import { QuickStatsWidget } from './widgets/QuickStatsWidget';
@@ -100,7 +100,7 @@ function SortableWidget({
       {React.cloneElement(children as React.ReactElement, {
         dragHandleProps: listeners,
         isDragging
-      })}
+      } as any)}
     </div>
   );
 }
@@ -108,7 +108,7 @@ function SortableWidget({
 export function DashboardLayout({
   currentContract,
   timeEntries,
-  originalTimeEntries,
+  originalTimeEntries: _originalTimeEntries,
   settings,
   layoutConfig,
   onLayoutChange
@@ -139,9 +139,6 @@ export function DashboardLayout({
     const { active, over } = event;
     
     if (over && active.id !== over.id) {
-      const oldIndex = enabledWidgets.findIndex(widget => widget.id === active.id);
-      const newIndex = enabledWidgets.findIndex(widget => widget.id === over.id);
-      
       const newWidgets = [...layoutConfig.widgets];
       const movedWidget = newWidgets.find(w => w.id === active.id);
       const targetWidget = newWidgets.find(w => w.id === over.id);

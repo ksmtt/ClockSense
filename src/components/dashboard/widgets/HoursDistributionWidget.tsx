@@ -1,10 +1,10 @@
 import { PieChart as PieChartIcon } from 'lucide-react';
 import { ChartContainer, ChartTooltip } from '../../ui/chart';
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell } from 'recharts';
 
 import { Contract, TimeEntry } from '../../../hooks/useClockifyData';
 import { useMemo } from 'react';
-import { CHART_COLORS, STANDARD_CHART_CONFIG } from '../../../constants/chartColors';
+import { STANDARD_CHART_CONFIG } from '../../../constants/chartColors';
 
 interface HoursDistributionWidgetProps {
   id: string;
@@ -20,15 +20,15 @@ interface HoursDistributionWidgetProps {
 }
 
 export function HoursDistributionWidget({
-  id,
+  id: _id,
   currentContract,
   timeEntries,
-  isDragging = false,
+  isDragging: _isDragging = false,
   size = 'medium',
-  onSettings,
-  onRemove,
-  onResize,
-  dragHandleProps,
+  onSettings: _onSettings,
+  onRemove: _onRemove,
+  onResize: _onResize,
+  dragHandleProps: _dragHandleProps,
   showLegend = true
 }: HoursDistributionWidgetProps) {
   
@@ -36,8 +36,19 @@ export function HoursDistributionWidget({
   const dimensions = typeof size === 'object' ? size : { width: 4, height: 4 };
   const isCompact = dimensions.width <= 3 || dimensions.height <= 3;
   const isLarge = dimensions.width >= 6 || dimensions.height >= 5;
-  const { progressData, totalHoursWorked, expectedHoursToDate } = useMemo(() => {
-    if (!currentContract) return { progressData: [], totalHoursWorked: 0, expectedHoursToDate: 0 };
+  
+  // Calculate chart dimensions
+  const gridCellWidth = 60; // Base cell width in pixels
+  const gridCellHeight = 60; // Base cell height in pixels
+  const padding = 32; // Widget padding
+  const headerHeight = isCompact ? 32 : 48; // Header height
+  
+  const widgetWidth = dimensions.width * gridCellWidth;
+  const widgetHeight = dimensions.height * gridCellHeight;
+  const chartWidth = widgetWidth - padding;
+  const chartHeight = widgetHeight - headerHeight;
+  const { progressData } = useMemo(() => {
+    if (!currentContract) return { progressData: [] };
 
     const contractStart = new Date(currentContract.startDate);
     const contractEnd = new Date(currentContract.endDate);
@@ -79,7 +90,7 @@ export function HoursDistributionWidget({
       }
     ].filter(item => item.value > 0);
 
-    return { progressData, totalHoursWorked, expectedHoursToDate };
+    return { progressData };
   }, [currentContract, timeEntries]);
 
   if (!currentContract) {
@@ -133,8 +144,7 @@ export function HoursDistributionWidget({
           config={STANDARD_CHART_CONFIG}
           className="flex-1 min-h-0"
         >
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
+          <PieChart width={chartWidth} height={chartHeight}>
               <defs>
                 {/* Enhanced vibrant gradients for pie chart */}
                 <linearGradient id="gradient2" x1="0" y1="0" x2="1" y2="1">
@@ -215,7 +225,6 @@ export function HoursDistributionWidget({
                 }}
               />
             </PieChart>
-          </ResponsiveContainer>
         </ChartContainer>
         
         {/* Enhanced Legend */}

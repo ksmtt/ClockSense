@@ -6,7 +6,6 @@ import { Label } from '../ui/label';
 import { Separator } from '../ui/separator';
 import { Switch } from '../ui/switch';
 import { Slider } from '../ui/slider';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { LayoutGrid, RotateCcw, Settings as SettingsIcon, ArrowUp, ArrowDown } from 'lucide-react';
 import { DashboardLayoutConfig, DashboardWidgetConfig } from '../../hooks/useClockifyData';
 

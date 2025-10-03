@@ -13,11 +13,11 @@ interface ContractTimelineWidgetProps {
 }
 
 export function ContractTimelineWidget({
-  id,
+  id: _id,
   currentContract,
   timeEntries,
-  settings,
-  onRemove
+  settings: _settings,
+  onRemove: _onRemove
 }: ContractTimelineWidgetProps) {
   const timelineData = useMemo(() => {
     if (!currentContract) return null;

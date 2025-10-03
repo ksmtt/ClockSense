@@ -73,6 +73,8 @@ export function DataImportExportButtons({
           accept=".json"
           className="hidden"
           onChange={handleFileImport}
+          aria-label="Import backup data file"
+          title="Import backup data file"
         />
       </div>
     </div>

@@ -1,10 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import "tailwindcss";
+/* ==========================================================================
+   CLOCKSENSE GLOBAL STYLES
+   ========================================================================== */
 
+/* --------------------------------------------------------------------------
+   IMPORTS & EXTERNAL DEPENDENCIES
+   -------------------------------------------------------------------------- */
+@import "tailwindcss";
+@import "./tokens.css";
+
+/* --------------------------------------------------------------------------
+   CUSTOM VARIANTS
+   -------------------------------------------------------------------------- */
 @custom-variant dark (&:is(.dark *));
 
+/* ==========================================================================
+   DESIGN TOKENS & THEME VARIABLES
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   LIGHT THEME VARIABLES
+   -------------------------------------------------------------------------- */
 :root {
-  /* Clockify Light Mode Colors */
+  /* ====== CORE SEMANTIC COLORS ====== */
   --font-size: 14px;
   --background: #FFFFFF;
   --foreground: rgba(0, 0, 0, 0.87);
@@ -27,11 +44,14 @@
   --input: transparent;
   --input-background: #F2F6F8;
   --switch-background: #90A4AE;
+  --ring: #03A9F4;
+  --radius: 2px;
+
+  /* ====== TYPOGRAPHY WEIGHTS ====== */
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: #03A9F4;
   
-  /* Clockify Blue-Gray Palette */
+  /* ====== CLOCKIFY BLUE-GRAY PALETTE ====== */
   --bg-01: #F2F6F8;
   --bg-02: #E4EAEE;
   --bg-03: #C6D2D9;
@@ -45,27 +65,38 @@
   --bg-11: #1D272C;
   --bg-12: #12191D;
   
-  /* Chart Colors - Using tokens.json equivalents */
-  --chart-1: #03a9f4;        /* Light Blue - from tokens.json */
-  --chart-2: #4caf50;        /* Green - from tokens.json */
-  --chart-3: #ff9800;        /* Orange - from tokens.json */
-  --chart-4: #9c27b0;        /* Purple - from tokens.json */
-  --chart-5: #f44336;        /* Red - from tokens.json */
-  --chart-6: #ffc107;        /* Amber - from tokens.json */
-  --chart-7: #00bcd4;        /* Cyan - from tokens.json */
-  --chart-8: #673ab7;        /* Deep Purple - from tokens.json */
-  
-  /* Semantic Alert Colors - Mapped from tokens.json alert palettes */
-  --success: #4caf50;         /* Green from basic-color-palette */
+  /* ====== SEMANTIC STATUS COLORS ====== */
+  --success: #4caf50;
   --success-foreground: #ffffff;
-  --info: #03a9f4;           /* Light Blue from basic-color-palette */
+  --info: #03a9f4;
   --info-foreground: #ffffff;
-  --warning: #ff9800;        /* Orange from basic-color-palette */
+  --warning: #ff9800;
   --warning-foreground: #ffffff;
-  --error: #f44336;          /* Red from basic-color-palette */
+  --error: #f44336;
   --error-foreground: #ffffff;
+
+  /* ====== ALERT BACKGROUND COLORS ====== */
+  --alert-info-bg: #E1F5FE;
+  --alert-info-text: #0277BD;
+  --alert-success-bg: #DBEFDC;
+  --alert-success-text: #285B2A;
+  --alert-warning-bg: #FFEACC;
+  --alert-warning-text: #854F00;
+  --alert-error-bg: #FDD9D7;
+  --alert-error-text: #7F231C;
+
+  /* ====== CHART COLORS ====== */
+  --chart-1: #03a9f4;        /* Light Blue */
+  --chart-2: #4caf50;        /* Green */
+  --chart-3: #ff9800;        /* Orange */
+  --chart-4: #9c27b0;        /* Purple */
+  --chart-5: #f44336;        /* Red */
+  --chart-6: #ffc107;        /* Amber */
+  --chart-7: #00bcd4;        /* Cyan */
+  --chart-8: #673ab7;        /* Deep Purple */
   
-  /* Chart Color Light Variations - Derived from tokens.json colors */
+  /* ====== CHART COLOR VARIATIONS ====== */
+  /* Light Variations */
   --chart-1-light: #4fc3f7;
   --chart-2-light: #81c784;
   --chart-3-light: #ffb74d;
@@ -75,7 +106,7 @@
   --chart-7-light: #4dd0e1;
   --chart-8-light: #9575cd;
   
-  /* Chart Color Dark Variations - Derived from tokens.json colors */
+  /* Dark Variations */
   --chart-1-dark: #0288d1;
   --chart-2-dark: #388e3c;
   --chart-3-dark: #f57c00;
@@ -85,7 +116,7 @@
   --chart-7-dark: #0097a7;
   --chart-8-dark: #512da8;
   
-  /* Gradient Color Stops - Based on tokens.json colors */
+  /* ====== GRADIENT COLORS ====== */
   --gradient-1-start: #03a9f4;
   --gradient-1-mid: #4fc3f7;
   --gradient-1-end: #81d4fa;
@@ -105,18 +136,8 @@
   --gradient-5-start: #f44336;
   --gradient-5-mid: #ef5350;
   --gradient-5-end: #e57373;
-  
-  /* Alert Colors */
-  --alert-info-bg: #E1F5FE;
-  --alert-info-text: #0277BD;
-  --alert-success-bg: #DBEFDC;
-  --alert-success-text: #285B2A;
-  --alert-warning-bg: #FFEACC;
-  --alert-warning-text: #854F00;
-  --alert-error-bg: #FDD9D7;
-  --alert-error-text: #7F231C;
-  
-  --radius: 2px;
+
+  /* ====== SIDEBAR COLORS ====== */
   --sidebar: #F2F6F8;
   --sidebar-foreground: rgba(0, 0, 0, 0.87);
   --sidebar-primary: #03A9F4;
@@ -127,8 +148,11 @@
   --sidebar-ring: #03A9F4;
 }
 
+/* --------------------------------------------------------------------------
+   DARK THEME VARIABLES
+   -------------------------------------------------------------------------- */
 .dark {
-  /* Clockify Dark Mode Colors */
+  /* ====== CORE SEMANTIC COLORS (DARK) ====== */
   --background: #263238;
   --foreground: rgba(255, 255, 255, 0.87);
   --card: #263238;
@@ -152,30 +176,28 @@
   --switch-background: #90A4AE;
   --ring: #03A9F4;
   
-  /* Chart Colors - Dark Mode - Using tokens.json equivalents */
-  --chart-1: #03a9f4;        /* Light Blue - same as tokens.json (works well in dark) */
-  --chart-2: #8bc34a;        /* Light Green - from tokens.json */
-  --chart-3: #ff9800;        /* Orange - from tokens.json */
-  --chart-4: #9c27b0;        /* Purple - from tokens.json */
-  --chart-5: #f44336;        /* Red - from tokens.json */
-  --chart-6: #ffc107;        /* Amber - from tokens.json */
-  --chart-7: #00bcd4;        /* Cyan - from tokens.json */
-  --chart-8: #673ab7;        /* Deep Purple - from tokens.json */
+  /* ====== CHART COLORS (DARK) ====== */
+  --chart-1: #03a9f4;        /* Light Blue */
+  --chart-2: #8bc34a;        /* Light Green */
+  --chart-3: #ff9800;        /* Orange */
+  --chart-4: #9c27b0;        /* Purple */
+  --chart-5: #f44336;        /* Red */
+  --chart-6: #ffc107;        /* Amber */
+  --chart-7: #00bcd4;        /* Cyan */
+  --chart-8: #673ab7;        /* Deep Purple */
   
-  /* Semantic Alert Colors - Dark Mode - Adjusted for dark background */
-  --success: #8bc34a;         /* Light Green from basic-color-palette */
+  /* ====== SEMANTIC STATUS COLORS (DARK) ====== */
+  --success: #8bc34a;         /* Light Green */
   --success-foreground: #000000;
-  --info: #03a9f4;           /* Light Blue from basic-color-palette */
+  --info: #03a9f4;           /* Light Blue */
   --info-foreground: #000000;
-  --warning: #ffc107;        /* Amber from basic-color-palette (better contrast) */
+  --warning: #ffc107;        /* Amber (better contrast) */
   --warning-foreground: #000000;
-  --error: #f44336;          /* Red from basic-color-palette */
+  --error: #f44336;          /* Red */
   --error-foreground: #ffffff;
-  --chart-6: #ffc107;        /* Amber - from tokens.json */
-  --chart-7: #00bcd4;        /* Cyan - from tokens.json */
-  --chart-8: #673ab7;        /* Deep Purple - from tokens.json */
   
-  /* Chart Color Light Variations - Dark Mode - Derived from tokens.json */
+  /* ====== CHART COLOR VARIATIONS (DARK) ====== */
+  /* Light Variations */
   --chart-1-light: #4fc3f7;
   --chart-2-light: #aed581;
   --chart-3-light: #ffb74d;
@@ -185,7 +207,7 @@
   --chart-7-light: #4dd0e1;
   --chart-8-light: #9575cd;
   
-  /* Chart Color Dark Variations - Dark Mode - Derived from tokens.json */
+  /* Dark Variations */
   --chart-1-dark: #0288d1;
   --chart-2-dark: #689f38;
   --chart-3-dark: #f57c00;
@@ -195,7 +217,7 @@
   --chart-7-dark: #0097a7;
   --chart-8-dark: #512da8;
   
-  /* Gradient Color Stops - Dark Mode - Based on tokens.json colors */
+  /* ====== GRADIENT COLORS (DARK) ====== */
   --gradient-1-start: #03a9f4;
   --gradient-1-mid: #4fc3f7;
   --gradient-1-end: #81d4fa;
@@ -215,17 +237,18 @@
   --gradient-5-start: #f44336;
   --gradient-5-mid: #ef5350;
   --gradient-5-end: #e57373;
-  
-  /* Alert Colors - Dark Mode */
-  --alert-info-bg: rgba(225, 245, 254, 0.1);
-  --alert-info-text: #03A9F4;
-  --alert-success-bg: rgba(219, 239, 220, 0.1);
-  --alert-success-text: #8BC34A;
-  --alert-warning-bg: rgba(255, 234, 204, 0.1);
-  --alert-warning-text: #FF9800;
-  --alert-error-bg: rgba(253, 217, 215, 0.1);
-  --alert-error-text: #F44336;
-  
+
+  /* ====== ALERT COLORS (DARK) ====== */
+  --alert-success-bg: #18381a;
+  --alert-success-text: #cde9ce;
+  --alert-info-bg: #01354d;
+  --alert-info-text: #cdeefd;
+  --alert-warning-bg: #523100;
+  --alert-warning-text: #ffe2b8;
+  --alert-error-bg: #551713;
+  --alert-error-text: #f44336;
+
+  /* ====== SIDEBAR COLORS (DARK) ====== */
   --sidebar: #12191D;
   --sidebar-foreground: rgba(255, 255, 255, 0.87);
   --sidebar-primary: #03A9F4;
@@ -236,7 +259,13 @@
   --sidebar-ring: #03A9F4;
 }
 
+}
+
+/* --------------------------------------------------------------------------
+   TAILWIND THEME INTEGRATION
+   -------------------------------------------------------------------------- */
 @theme {
+  /* ====== CORE SEMANTIC COLORS ====== */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -260,7 +289,7 @@
   --color-switch-background: var(--switch-background);
   --color-ring: var(--ring);
   
-  /* Enhanced Chart Colors */
+  /* ====== CHART COLORS ====== */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -270,7 +299,7 @@
   --color-chart-7: var(--chart-7);
   --color-chart-8: var(--chart-8);
   
-  /* Chart Color Light Variations */
+  /* ====== CHART COLOR VARIATIONS ====== */
   --color-chart-1-light: var(--chart-1-light);
   --color-chart-2-light: var(--chart-2-light);
   --color-chart-3-light: var(--chart-3-light);
@@ -280,7 +309,6 @@
   --color-chart-7-light: var(--chart-7-light);
   --color-chart-8-light: var(--chart-8-light);
   
-  /* Chart Color Dark Variations */
   --color-chart-1-dark: var(--chart-1-dark);
   --color-chart-2-dark: var(--chart-2-dark);
   --color-chart-3-dark: var(--chart-3-dark);
@@ -290,7 +318,17 @@
   --color-chart-7-dark: var(--chart-7-dark);
   --color-chart-8-dark: var(--chart-8-dark);
   
-  /* Gradient Colors */
+  /* ====== SEMANTIC STATUS COLORS ====== */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-error: var(--error);
+  --color-error-foreground: var(--error-foreground);
+  
+  /* ====== GRADIENT COLORS ====== */
   --color-gradient-1-start: var(--gradient-1-start);
   --color-gradient-1-mid: var(--gradient-1-mid);
   --color-gradient-1-end: var(--gradient-1-end);
@@ -307,7 +345,7 @@
   --color-gradient-5-mid: var(--gradient-5-mid);
   --color-gradient-5-end: var(--gradient-5-end);
   
-  /* Sidebar Colors */
+  /* ====== SIDEBAR COLORS ====== */
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -317,13 +355,20 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   
-  /* Radii */
+  /* ====== BORDER RADIUS ====== */
   --radius-sm: 1px;
   --radius-md: 2px;
   --radius-lg: 4px;
   --radius-xl: 8px;
 }
 
+/* ==========================================================================
+   TYPOGRAPHY SYSTEM
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   BASE STYLES
+   -------------------------------------------------------------------------- */
 @layer base {
   * {
     @apply border-border;
@@ -333,13 +378,18 @@
     @apply bg-background text-foreground;
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, sans-serif;
   }
+
+  html {
+    font-size: var(--font-size);
+  }
 }
 
-/**
- * Clockify Typography System
- */
+/* --------------------------------------------------------------------------
+   CLOCKIFY TYPOGRAPHY SCALE
+   -------------------------------------------------------------------------- */
 @layer base {
   :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    /* ====== HEADINGS ====== */
     /* Hero Title - 24px */
     h1 {
       font-size: 24px;
@@ -354,28 +404,27 @@
       line-height: 27px;
     }
 
-    /* Body Text - 14px */
+    /* Body Text Headings - 14px */
     h3, h4 {
       font-size: 14px;
       font-weight: var(--font-weight-medium);
       line-height: 21px;
     }
 
-    /* Body Text 1 - 14px */
+    /* ====== BODY TEXT ====== */
     p {
       font-size: 14px;
       font-weight: var(--font-weight-normal);
       line-height: 21px;
     }
 
-    /* Label Text - 14px */
+    /* ====== FORM ELEMENTS ====== */
     label {
       font-size: 14px;
       font-weight: var(--font-weight-normal);
       line-height: 16px;
     }
 
-    /* Button Text - 14px Uppercase */
     button {
       font-size: 14px;
       font-weight: var(--font-weight-normal);
@@ -383,14 +432,13 @@
       text-transform: uppercase;
     }
 
-    /* Input Text - 14px */
     input, textarea, select {
       font-size: 14px;
       font-weight: var(--font-weight-normal);
       line-height: 21px;
     }
 
-    /* Caption Text - 12px */
+    /* ====== SMALL TEXT ====== */
     small {
       font-size: 12px;
       font-weight: var(--font-weight-normal);
@@ -399,19 +447,26 @@
   }
 }
 
-html {
-  font-size: var(--font-size);
-}
+/* ==========================================================================
+   CUSTOM UTILITIES
+   ========================================================================== */
 
-/* Custom utilities */
+/* --------------------------------------------------------------------------
+   TYPOGRAPHY UTILITIES
+   -------------------------------------------------------------------------- */
 @layer utilities {
   .text-caption {
     font-size: 12px;
     font-weight: 400;
     line-height: 18px;
   }
-  
-  /* Grid Layout Utilities */
+}
+
+/* --------------------------------------------------------------------------
+   GRID & LAYOUT UTILITIES
+   -------------------------------------------------------------------------- */
+@layer utilities {
+  /* ====== GRID BACKGROUNDS ====== */
   .grid-background {
     background-image: 
       linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),

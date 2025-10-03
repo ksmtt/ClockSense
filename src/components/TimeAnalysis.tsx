@@ -1,12 +1,11 @@
 import { useState, useMemo } from 'react';
-import { Calendar, TrendingUp, BarChart3, Target, Sun } from 'lucide-react';
+import { TrendingUp, BarChart3, Target, Sun } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from './ui/chart';
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LineChart, Line, Area, AreaChart, Cell } from 'recharts';
+import { ChartContainer, ChartTooltip } from './ui/chart';
+import { BarChart, Bar, XAxis, YAxis, Area, AreaChart, Cell } from 'recharts';
 import { Contract, TimeEntry, AppSettings } from '../hooks/useClockifyData';
 import { TimeEntriesDataView } from './TimeEntriesDataView';
 
@@ -86,7 +85,7 @@ export function TimeAnalysis({ contracts, timeEntries, originalTimeEntries, sett
     });
 
     // Generate chart data based on view mode
-    const chartData = [];
+    const chartData: Array<any> = [];
     const expectedHoursPerPeriod = getExpectedHoursPerPeriod();
 
     if (viewMode === 'daily') {
@@ -346,7 +345,7 @@ export function TimeAnalysis({ contracts, timeEntries, originalTimeEntries, sett
           />
           
           <Select value={selectedContract} onValueChange={setSelectedContract}>
-            <SelectTrigger className="w-48">
+            <SelectTrigger className="w-48" aria-label="Select contract" title="Select contract">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -360,7 +359,7 @@ export function TimeAnalysis({ contracts, timeEntries, originalTimeEntries, sett
           </Select>
           
           <Select value={timeFrame} onValueChange={(value: TimeFrame) => setTimeFrame(value)}>
-            <SelectTrigger className="w-32">
+            <SelectTrigger className="w-32" aria-label="Select time frame" title="Select time frame">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -437,7 +436,7 @@ export function TimeAnalysis({ contracts, timeEntries, originalTimeEntries, sett
       </div>
 
       {/* Charts */}
-      <Tabs value={viewMode} onValueChange={(value: ViewMode) => setViewMode(value)}>
+      <Tabs value={viewMode} onValueChange={(value) => setViewMode(value as ViewMode)}>
         <TabsList>
           <TabsTrigger value="daily">Daily View</TabsTrigger>
           <TabsTrigger value="weekly">Weekly View</TabsTrigger>
@@ -471,8 +470,7 @@ export function TimeAnalysis({ contracts, timeEntries, originalTimeEntries, sett
                   }}
                   className="h-[300px]"
                 >
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={analysisData.chartData}>
+                  <BarChart data={analysisData.chartData}>
                       <defs>
                         {/* Enhanced gradient for expected hours */}
                         <linearGradient id="enhancedExpectedGradient" x1="0" y1="0" x2="0" y2="1">
@@ -507,8 +505,8 @@ export function TimeAnalysis({ contracts, timeEntries, originalTimeEntries, sett
                       <ChartTooltip 
                         content={({ active, payload, label }) => {
                           if (active && payload && payload.length) {
-                            const actual = payload.find(p => p.dataKey === 'actual')?.value || 0;
-                            const expected = payload.find(p => p.dataKey === 'expected')?.value || 0;
+                            const actual = Number(payload.find(p => p.dataKey === 'actual')?.value || 0);
+                            const expected = Number(payload.find(p => p.dataKey === 'expected')?.value || 0);
                             const data = payload[0].payload;
                             const performance = expected > 0 ? ((actual / expected - 1) * 100).toFixed(1) : '0';
                             const variance = actual - expected;
@@ -538,7 +536,7 @@ export function TimeAnalysis({ contracts, timeEntries, originalTimeEntries, sett
                                         variance > 0 ? 'text-chart-2' : 
                                         variance < -2 ? 'text-chart-6' : 'text-muted-foreground'
                                       }`}>
-                                        Performance: {performance > 0 ? '+' : ''}{performance}%
+                                        Performance: {Number(performance) > 0 ? '+' : ''}{performance}%
                                       </span>
                                       <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs ${
                                         variance > 2 ? 'bg-chart-3/20 text-chart-3' : 
@@ -578,8 +576,7 @@ export function TimeAnalysis({ contracts, timeEntries, originalTimeEntries, sett
                         radius={[4, 4, 0, 0]} 
                         opacity={0.8}
                       />
-                    </BarChart>
-                  </ResponsiveContainer>
+                  </BarChart>
                 </ChartContainer>
                 
                 {/* Bar Chart Performance Summary */}
@@ -630,8 +627,7 @@ export function TimeAnalysis({ contracts, timeEntries, originalTimeEntries, sett
                   }}
                   className="h-[300px]"
                 >
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={analysisData.chartData}>
+                  <AreaChart data={analysisData.chartData}>
                       <defs>
                         {/* Vibrant multi-stop gradient for area fill */}
                         <linearGradient id="vibranceCumulativeGradient" x1="0" y1="0" x2="0" y2="1">
@@ -689,7 +685,7 @@ export function TimeAnalysis({ contracts, timeEntries, originalTimeEntries, sett
                             const totalExpected = analysisData.chartData
                               .slice(0, analysisData.chartData.indexOf(data) + 1)
                               .reduce((sum, item) => sum + item.expected, 0);
-                            const variance = payload[0].value - totalExpected;
+                            const variance = Number(payload[0]?.value || 0) - totalExpected;
                             const percentageVariance = totalExpected > 0 ? ((variance / totalExpected) * 100).toFixed(1) : '0';
                             
                             return (
@@ -748,8 +744,7 @@ export function TimeAnalysis({ contracts, timeEntries, originalTimeEntries, sett
                           filter: 'url(#cumulativeGlow)'
                         }}
                       />
-                    </AreaChart>
-                  </ResponsiveContainer>
+                  </AreaChart>
                 </ChartContainer>
                 
                 {/* Enhanced Cumulative Chart Legend */}
@@ -920,10 +915,9 @@ export function TimeAnalysis({ contracts, timeEntries, originalTimeEntries, sett
                         </div>
                         <div className="p-2 rounded bg-primary/10 border border-primary/20">
                           <p className="text-xs">
-                            {settings.breakTimeSettings.showAdjustedTime 
+                            {settings.breakTimeSettings.showAdjustedTime
                               ? 'Showing break-adjusted times'
-                              : 'Showing original times'
-                            }
+                              : 'Showing original times'}
                           </p>
                         </div>
                       </>

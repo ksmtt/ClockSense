@@ -1,6 +1,6 @@
 # Clockify Contract Hours Tracker – Design Guidelines
 
-> **Design Tokens Reference**: All design decisions must reference the values defined in `/tokens.json`. Never hardcode fonts, colors, spacing, or other visual values.
+> **Design Tokens Reference**: All design decisions use the build-time token processing system. Check `src/tokens.json` → Style Dictionary automatically generates CSS variables → Use `hsl(var(--variable-name))` in components.
 
 ---
 
@@ -8,14 +8,14 @@
 
 ### 1. Consistency with Clockify
 
-- Use the official blue-gray color palette (`global/blue-gray-color-palette`).
+- Use the official blue-gray color palette from tokens.
 - Minimalist and professional styling.
 - Keep focus on time tracking and contract analysis.
 
 ### 2. Data-Driven Design
 
 - Prioritize clarity in data visualization.
-- Use consistent color coding from tokens.
+- Use consistent color coding from generated tokens.
 - Represent time in human-readable formats (e.g., "2h 30m" not "2.5h").
 
 ### 3. Responsive Layout
@@ -23,6 +23,60 @@
 - **8px grid system**: All spacing must align to this system using Tailwind classes
 - **Dashboard flexibility**: Widgets adapt from 4-column desktop to 1-column mobile layout
 - **Chart responsiveness**: Ensure data visualization remains readable on all screen sizes
+
+---
+
+## Build-Time Token Processing System
+
+### How It Works
+
+Our design system uses **Style Dictionary** to automatically convert JSON tokens to CSS variables:
+
+```
+src/tokens.json → build-tokens.mjs → src/styles/tokens.css
+```
+
+1. **Edit tokens**: Modify `src/tokens.json`
+2. **Auto-rebuild**: File watching automatically regenerates CSS variables
+3. **Use variables**: Reference generated variables in components
+
+### Development Workflow
+
+**Start development with automatic token rebuilding:**
+
+```bash
+npm run dev              # Runs token build + file watching + Vite dev server
+npm run tokens:build     # Manual one-time token build
+```
+
+**Available CSS Variables** (auto-generated from tokens.json):
+
+```css
+/* Basic Colors */
+--color-red: #f44336;
+--color-green: #4caf50;
+--color-light-blue: #03a9f4;
+--color-orange: #ff9800;
+
+/* Background Palette */
+--bg-01: #f2f6f8; /* Lightest */
+--bg-12: #12191d; /* Darkest */
+
+/* Semantic Status Colors */
+--status-success: #4caf50;
+--status-error: #f44336;
+--status-warning: #ff9800;
+--status-info: #03a9f4;
+
+/* Typography */
+--font-size-hero: 24;
+--font-weight-medium: 500;
+--line-height-body: 21;
+
+/* Alert Colors (Light & Dark Mode) */
+--alert-light-success-alert-bg: #dbefdc;
+--alert-dark-success-alert-bg: #18381a;
+```
 
 ---
 
@@ -72,160 +126,223 @@ export function [Name]Widget({ currentContract, timeEntries, settings }: [Name]W
 
 ## Design Token Usage
 
-### Development Workflow: Tokens-First Approach
+### Development Workflow: Build-Time Tokens
 
-**When answering prompts or implementing features:**
+**When implementing any feature with styling:**
 
-1. **ALWAYS check `src/tokens.json` FIRST** for available design tokens
-2. **Use existing tokens** if they match the design need
-3. **Map tokens to CSS variables** in `globals.css` if semantic mapping is needed
-4. **Implement using CSS variables** in components
-5. **Only add new tokens** if no suitable token exists in `tokens.json`
+1. **Check `src/tokens.json`** for available tokens
+2. **Use existing CSS variables** generated from tokens
+3. **Add semantic mappings** in `globals.css` if needed
+4. **Implement with CSS variables** in components
+5. **Add new tokens to `tokens.json`** only if absolutely necessary
 
 ### Three-Layer Design System Architecture
 
 ```
-tokens.json (Design Decisions - CHECK FIRST)
-    ↓
-globals.css (Semantic Mapping - UPDATE IF NEEDED)
-    ↓
-Components (Implementation - USE CSS VARIABLES)
+src/tokens.json (Source of Truth)
+    ↓ Style Dictionary Build
+src/styles/tokens.css (Auto-generated CSS Variables)
+    ↓ Semantic Mapping
+src/styles/globals.css (Theme Integration)
+    ↓ Implementation
+Components (Use CSS Variables)
 ```
 
-### Prompt Response Protocol
+### Implementation Workflow
 
 **Before implementing any design-related feature:**
 
-1. **Reference `tokens.json`**: Check what colors, typography, spacing already exist
-2. **Quote available tokens**: Show which tokens from `tokens.json` apply
-3. **Map to CSS variables**: If new semantic meaning needed, add to `globals.css`
-4. **Implement with variables**: Use `hsl(var(--token-name))` in components
+1. **Check `src/tokens.json`**: See what tokens exist
+2. **Check `src/styles/tokens.css`**: See generated CSS variables
+3. **Check `src/styles/globals.css`**: See semantic mappings
+4. **Implement**: Use `hsl(var(--variable-name))` in components
 
 **Example workflow:**
 
 ```
 User asks for "error state styling" →
-1. Check tokens.json: Found "basic-color-palette.red"
-2. Check globals.css: Found "--error: #f44336" (already mapped)
-3. Implement: background-color: hsl(var(--error))
+1. Check tokens.json: Found "basic-color-palette.red": "#f44336"
+2. Check tokens.css: Found "--color-red: #f44336" (auto-generated)
+3. Check globals.css: Found "--error: #f44336" (semantic mapping)
+4. Implement: background-color: hsl(var(--error))
 ```
 
 ### File Modification Decision Tree
 
 **When do I modify which files?**
 
-#### Modify `tokens.json` when:
+#### Modify `src/tokens.json` when:
 
-- ❌ **RARELY** - Only when adding completely new base colors/typography
-- ✅ New brand colors, new font families, new spacing scales
-- ✅ Design system updates from design team/Figma
+- ✅ Adding completely new base colors or design values
+- ✅ Design system updates from design team
+- ✅ New semantic color categories needed
+- ❌ **RARELY** - Most styling uses existing tokens
 
-#### Modify `globals.css` when:
+#### Modify `src/styles/globals.css` when:
 
-- ✅ **FREQUENTLY** - Adding semantic mappings from existing tokens
+- ✅ **FREQUENTLY** - Adding semantic mappings from generated tokens
 - ✅ Creating theme-aware color variations (light/dark mode)
-- ✅ Adding component-specific semantic tokens
-- ✅ Mapping `tokens.json` values to usable CSS variables
+- ✅ Mapping generated CSS variables to semantic names
+- ✅ Component-specific token mappings
 
-#### Modify component files when:
+#### Components use existing CSS variables:
 
-- ✅ **ALWAYS** - Implementing actual features and UI
-- ✅ Using existing CSS variables for styling
-- ✅ Never hardcoding colors/fonts/spacing
+- ✅ **ALWAYS** - Use existing CSS variables for styling
+- ✅ `hsl(var(--color-name))` for colors
+- ✅ `var(--font-size-hero)` for typography
+- ❌ **NEVER** - Hardcode colors, fonts, or spacing
 
 **Examples:**
 
 ```
-Need success color → Check tokens.json → Use existing green → Map to --success in globals.css
-Need chart colors → Check tokens.json → Use basic-color-palette → Already mapped to --chart-1 etc.
-Need new feature → Check tokens.json → Use CSS variables → Implement in component
+Need success color → tokens.json has green → auto-generated --color-green → mapped to --success
+Need chart colors → tokens.json has palette → auto-generated --color-* → mapped to --chart-1
+Need status colors → tokens.json updated → generates --status-success → use directly
 ```
 
-### Implementation Decision Guide
+### Current Token Categories (Auto-Generated)
 
-**After checking `tokens.json`, choose the right implementation method:**
+**From `src/tokens.json`, Style Dictionary generates these CSS variables:**
 
-**Use CSS variables for:**
-
-- **Theme-dependent values**: Colors that change between light/dark modes
-- **Chart colors**: `--chart-1` through `--chart-8` (with light/dark variations)
-- **Semantic colors**: `--success`, `--warning`, `--error`, `--info`
-- **Component tokens**: `--radius`, `--primary`, `--background`, etc.
-- **Interactive states**: Hover, focus, active state colors
-
-**Use direct token access for:**
-
-- **Static design decisions**: Font families, fixed spacing values
-- **Build-time constants**: Breakpoint values, animation durations
-- **Design tool integration**: When generating CSS from Figma tokens
-- **Documentation**: Showing available token values in comments
-
-### Color Implementation Layers
-
-#### Layer 1: Design Tokens (`tokens.json`)
-
-Raw color definitions from your design system:
-
-```js
-tokens.global["basic-color-palette"]["green"].value; // #4caf50
-tokens.global["primary-color-palette"]["primary"].value; // #03a9f4
-```
-
-#### Layer 2: Semantic CSS Variables (`globals.css`)
-
-Theme-aware semantic tokens mapped from design tokens:
+#### Basic Colors
 
 ```css
-/* Semantic colors - automatically adapt to light/dark */
---success: #4caf50; /* Green from tokens.json */
---warning: #ff9800; /* Orange from tokens.json */
---error: #f44336; /* Red from tokens.json */
---info: #03a9f4; /* Light Blue from tokens.json */
-
-/* Chart colors - consistent data visualization */
---chart-1: #03a9f4; /* Maps to tokens.json light-blue */
---chart-2: #4caf50; /* Maps to tokens.json green */
+--color-red: #f44336;
+--color-green: #4caf50;
+--color-light-blue: #03a9f4;
+--color-orange: #ff9800;
+--color-purple: #9c27b0;
+/* + more from basic-color-palette */
 ```
 
-#### Layer 3: Component Implementation
-
-Use semantic CSS variables in components:
+#### Background Palette
 
 ```css
-/* ✅ Preferred - Semantic and theme-aware */
-background-color: hsl(var(--success));
-color: hsl(var(--chart-1));
-border-color: hsl(var(--primary));
+--bg-01: #f2f6f8; /* Lightest blue-gray */
+--bg-02: #e4eaee;
+/* ... */
+--bg-12: #12191d; /* Darkest blue-gray */
 ```
 
-### Alert Colors by Mode
+#### Primary Colors
 
-Alert colors use specific palettes for optimal contrast:
-
-```js
-// Light mode alerts - from tokens.json
-tokens.global["alert-color-palette-light-mode"]["success-alert-bg"].value;
-
-// Dark mode alerts - from tokens.json
-tokens.global["alert-color-palette-dark-mode"]["success-alert-bg"].value;
+```css
+--primary: #03a9f4;
+--primary-hover: #0288d1;
 ```
 
-### Typography
+#### Status Colors (Semantic)
 
-- Font family: `tokens.global.fontfamilies.roboto.value` (Roboto).
-- Use text styles under `text-styles`:
-  - `hero-title` (24px, normal weight, 34px line-height)
-  - `heading-2` (18px, medium weight, 27px line-height)
-  - `body-text` (14px, normal weight, 21px line-height)
-  - `label-text` (14px, normal weight, 16px line-height)
-  - `button-text` (14px, normal weight, 16px line-height, uppercase)
-  - `caption-text` (12px, normal weight, 18px line-height)
+```css
+--status-success: #4caf50;
+--status-error: #f44336;
+--status-warning: #ff9800;
+--status-info: #03a9f4;
+```
 
-**Individual font tokens available:**
+#### Typography
 
-- Font sizes: `tokens.global.fontsize[key].value` (hero, heading, body, label, button, caption)
-- Font weights: `tokens.global.fontweights[key].value` (normal: 400, medium: 500)
-- Line heights: `tokens.global.lineheights[key].value`
+```css
+--font-size-hero: 24;
+--font-size-heading: 18;
+--font-size-body: 14;
+--font-weight-normal: 400;
+--font-weight-medium: 500;
+--line-height-hero: 34;
+--line-height-body: 21;
+```
+
+#### Alert Colors (Light/Dark Modes)
+
+```css
+--alert-light-success-alert-bg: #dbefdc;
+--alert-light-success-alert-text: #285b2a;
+--alert-dark-success-alert-bg: #18381a;
+--alert-dark-success-alert-text: #cde9ce;
+/* + warning, error, info variants */
+```
+
+### Implementation Examples
+
+**Using generated CSS variables in components:**
+
+```css
+/* ✅ Status colors - Use semantic variables */
+.success-state {
+  background-color: hsl(var(--status-success));
+}
+.error-state {
+  background-color: hsl(var(--status-error));
+}
+
+/* ✅ Chart colors - Generated from tokens */
+.chart-primary {
+  fill: hsl(var(--color-light-blue));
+}
+.chart-secondary {
+  fill: hsl(var(--color-green));
+}
+
+/* ✅ Background palette */
+.card-background {
+  background-color: hsl(var(--bg-01));
+}
+.header-background {
+  background-color: hsl(var(--bg-10));
+}
+
+/* ✅ Typography - Use generated font variables */
+.hero-title {
+  font-size: calc(var(--font-size-hero) * 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: calc(var(--line-height-hero) * 1px);
+}
+```
+
+### Alert System Integration
+
+Alert colors automatically adapt to light/dark themes using generated variables:
+
+```css
+/* Auto-generated from tokens.json alert palettes */
+.alert-success {
+  background-color: hsl(var(--alert-light-success-alert-bg));
+  color: hsl(var(--alert-light-success-alert-text));
+}
+
+.dark .alert-success {
+  background-color: hsl(var(--alert-dark-success-alert-bg));
+  color: hsl(var(--alert-dark-success-alert-text));
+}
+```
+
+### Typography System
+
+Typography scales are auto-generated from `tokens.json` text-styles:
+
+- **Hero Title**: 24px, normal weight, 34px line-height
+- **Heading 2**: 18px, medium weight, 27px line-height
+- **Body Text**: 14px, normal weight, 21px line-height
+- **Label Text**: 14px, normal weight, 16px line-height
+- **Button Text**: 14px, normal weight, 16px line-height, uppercase
+- **Caption Text**: 12px, normal weight, 18px line-height
+
+**Generated CSS variables for typography:**
+
+```css
+/* Font sizes - use with calc() for px values */
+--font-size-hero: 24; /* calc(var(--font-size-hero) * 1px) = 24px */
+--font-size-heading: 18;
+--font-size-body: 14;
+
+/* Font weights */
+--font-weight-normal: 400;
+--font-weight-medium: 500;
+
+/* Line heights */
+--line-height-hero: 34;
+--line-height-body: 21;
+```
 
 ### Typography Implementation Priority
 
@@ -266,26 +383,35 @@ tokens.global["alert-color-palette-dark-mode"]["success-alert-bg"].value;
 
 ## Extending the Design System
 
-### Adding New Semantic Tokens
+### Adding New Tokens (Build-Time Process)
 
-When you need new semantic colors or tokens:
+When you need new colors or design values:
 
-1. **Add to `tokens.json`** (if it's a new base color):
+1. **Add to `src/tokens.json`**:
 
    ```json
-   "new-color-palette": {
-     "tertiary": {
-       "value": "#9c27b0",
-       "type": "color"
+   {
+     "global": {
+       "semantic-color-palette": {
+         "tertiary": {
+           "value": "#9c27b0",
+           "type": "color"
+         }
+       }
      }
    }
    ```
 
-2. **Map to CSS variables in `globals.css`**:
+2. **Tokens auto-rebuild** (if dev server running):
+   - File watching detects the change
+   - Style Dictionary rebuilds `src/styles/tokens.css`
+   - New CSS variable `--tertiary: #9c27b0` is generated
+
+3. **Add semantic mapping in `globals.css`** (if needed):
 
    ```css
    :root {
-     --tertiary: #9c27b0; /* From tokens.json */
+     --tertiary: var(--color-tertiary); /* Reference auto-generated variable */
      --tertiary-foreground: #ffffff;
    }
 
@@ -295,11 +421,39 @@ When you need new semantic colors or tokens:
    }
    ```
 
-3. **Use in components**:
+4. **Use in components**:
    ```css
    background-color: hsl(var(--tertiary));
-   color: hsl(var(--tertiary-foreground));
    ```
+
+### Build Configuration
+
+The build system automatically handles token transformation:
+
+- **Input**: `src/tokens.json` (design tokens)
+- **Processor**: `build-tokens.mjs` (Style Dictionary configuration)
+- **Output**: `src/styles/tokens.css` (CSS variables)
+- **Integration**: `src/styles/globals.css` imports tokens.css
+
+**Transform Naming Convention:**
+
+- `basic-color-palette.red` → `--color-red`
+- `blue-gray-color-palette.bg-01` → `--bg-01`
+- `semantic-color-palette.status-success` → `--status-success`
+- `fontsize.hero` → `--font-size-hero`
+
+### Development Commands
+
+```bash
+# Start development with automatic token rebuilding
+npm run dev
+
+# Manual token build (if needed)
+npm run tokens:build
+
+# Watch tokens only (without Vite)
+npm run tokens:build:watch
+```
 
 ### Chart Color Extension
 

@@ -1,0 +1,86 @@
+# Apache .htaccess configuration for Apache hosting
+# Note: GitHub Pages does not support .htaccess files
+# This file is provided for future Apache deployments
+# Security and Performance Headers
+
+<IfModule mod_headers.c>
+    # Security Headers
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.clockify.me; frame-ancestors 'none';"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "camera=(), microphone=(), location=(), geolocation=()"
+    
+    # Remove deprecated headers
+    Header unset X-XSS-Protection
+    Header unset X-Frame-Options
+    Header unset Expires
+    Header unset Pragma
+    
+    # Content Type Headers
+    <FilesMatch "\.(js)$">
+        Header set Content-Type "text/javascript; charset=utf-8"
+    </FilesMatch>
+    
+    <FilesMatch "\.(html)$">
+        Header set Content-Type "text/html; charset=utf-8"
+    </FilesMatch>
+    
+    <FilesMatch "\.(css)$">
+        Header set Content-Type "text/css; charset=utf-8"
+    </FilesMatch>
+    
+    <FilesMatch "\.(json)$">
+        Header set Content-Type "application/json; charset=utf-8"
+    </FilesMatch>
+    
+    <FilesMatch "\.(png)$">
+        Header set Content-Type "image/png"
+    </FilesMatch>
+    
+    <FilesMatch "\.(jpg|jpeg)$">
+        Header set Content-Type "image/jpeg"
+    </FilesMatch>
+    
+    <FilesMatch "\.(svg)$">
+        Header set Content-Type "image/svg+xml; charset=utf-8"
+    </FilesMatch>
+    
+    <FilesMatch "\.(ico)$">
+        Header set Content-Type "image/x-icon"
+    </FilesMatch>
+</IfModule>
+
+# Cache Control
+<IfModule mod_expires.c>
+    ExpiresActive on
+    
+    # HTML files - no cache
+    ExpiresByType text/html "access plus 0 seconds"
+    
+    # Static assets - 1 year
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # JSON files - 1 day
+    ExpiresByType application/json "access plus 1 day"
+</IfModule>
+
+<IfModule mod_headers.c>
+    # Cache Control Headers
+    <FilesMatch "\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    
+    <FilesMatch "\.(html)$">
+        Header set Cache-Control "public, max-age=0, must-revalidate"
+    </FilesMatch>
+    
+    <FilesMatch "\.(json)$">
+        Header set Cache-Control "public, max-age=86400"
+    </FilesMatch>
+</IfModule>

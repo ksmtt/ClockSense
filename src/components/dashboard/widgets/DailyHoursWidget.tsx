@@ -1,6 +1,6 @@
 import { BarChart3 } from 'lucide-react';
 import { ChartContainer, ChartTooltip } from '../../ui/chart';
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Cell } from 'recharts';
 
 import { Contract, TimeEntry, AppSettings } from '../../../hooks/useClockifyData';
 import { useMemo } from 'react';
@@ -22,16 +22,16 @@ interface DailyHoursWidgetProps {
 }
 
 export function DailyHoursWidget({
-  id,
+  id: _id,
   currentContract,
   timeEntries,
   settings,
-  isDragging = false,
+  isDragging: _isDragging = false,
   size = 'medium',
-  onSettings,
-  onRemove,
-  onResize,
-  dragHandleProps,
+  onSettings: _onSettings,
+  onRemove: _onRemove,
+  onResize: _onResize,
+  dragHandleProps: _dragHandleProps,
   timeRange = 7,
   showWeekends = true
 }: DailyHoursWidgetProps) {
@@ -40,6 +40,17 @@ export function DailyHoursWidget({
   const dimensions = typeof size === 'object' ? size : { width: 8, height: 4 };
   const isCompact = dimensions.width <= 4 || dimensions.height <= 3;
   const isLarge = dimensions.width >= 10 || dimensions.height >= 5;
+  
+  // Calculate chart dimensions
+  const gridCellWidth = 60; // Base cell width in pixels
+  const gridCellHeight = 60; // Base cell height in pixels
+  const padding = 32; // Widget padding
+  const headerHeight = isCompact ? 32 : 64; // Header height
+  
+  const widgetWidth = dimensions.width * gridCellWidth;
+  const widgetHeight = dimensions.height * gridCellHeight;
+  const chartWidth = widgetWidth - padding;
+  const chartHeight = widgetHeight - headerHeight;
   const chartData = useMemo(() => {
     if (!currentContract) return [];
 
@@ -139,8 +150,11 @@ export function DailyHoursWidget({
           config={STANDARD_CHART_CONFIG}
           className="h-full w-full"
         >
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={chartData}>
+          <BarChart 
+            data={chartData} 
+            width={chartWidth} 
+            height={chartHeight}
+          >
             <defs>
               <linearGradient id="expectedGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor={CHART_COLORS.TARGET_EXPECTED} stopOpacity={0.9} />
@@ -197,7 +211,7 @@ export function DailyHoursWidget({
                         </div>
                         <div className="flex items-center gap-2">
                           <div className="w-3 h-3 rounded shadow-sm bg-chart-8/70" />
-                          <span className="text-sm">Expected: {expected.toFixed(1)}h</span>
+                          <span className="text-sm">Expected: {Number(expected).toFixed(1)}h</span>
                         </div>
                         {data.isWeekend && (
                           <p className="text-xs text-muted-foreground mt-1">🏖️ Weekend</p>
@@ -226,8 +240,7 @@ export function DailyHoursWidget({
               opacity={0.7}
             />
           </BarChart>
-        </ResponsiveContainer>
-      </ChartContainer>
+        </ChartContainer>
       </div>
     </div>
   );

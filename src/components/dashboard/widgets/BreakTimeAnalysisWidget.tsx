@@ -1,6 +1,6 @@
 import { Coffee, Clock, TrendingDown } from 'lucide-react';
 import { ChartContainer, ChartTooltip } from '../../ui/chart';
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis } from 'recharts';
 import { Badge } from '../../ui/badge';
 import { Contract, TimeEntry, AppSettings } from '../../../hooks/useClockifyData';
 import { useMemo } from 'react';
@@ -14,12 +14,23 @@ interface BreakTimeAnalysisWidgetProps {
 }
 
 export function BreakTimeAnalysisWidget({
-  id,
+  id: _id,
   currentContract,
   timeEntries,
   settings,
-  onRemove
+  onRemove: _onRemove
 }: BreakTimeAnalysisWidgetProps) {
+  // Calculate chart dimensions (default size)
+  const size = { width: 4, height: 3 };
+  const gridCellWidth = 60; // Base cell width in pixels
+  const gridCellHeight = 60; // Base cell height in pixels
+  const padding = 32; // Widget padding
+  const headerHeight = 64; // Header height
+  
+  const widgetWidth = size.width * gridCellWidth;
+  const widgetHeight = size.height * gridCellHeight;
+  const chartWidth = widgetWidth - padding;
+  const chartHeight = widgetHeight - headerHeight;
   const breakAnalysis = useMemo(() => {
     if (!currentContract || !settings.breakTimeSettings.breakTimeMinutes) {
       return null;
@@ -159,8 +170,7 @@ export function BreakTimeAnalysisWidget({
           }}
           className="h-32"
         >
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={breakAnalysis.weeklyData}>
+          <BarChart data={breakAnalysis.weeklyData} width={chartWidth} height={chartHeight}>
               <XAxis 
                 dataKey="week" 
                 tickLine={false}
@@ -173,7 +183,7 @@ export function BreakTimeAnalysisWidget({
                 tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }}
               />
               <ChartTooltip 
-                content={({ active, payload, label }) => {
+                content={({ active, payload, label: _label }) => {
                   if (active && payload && payload.length) {
                     const data = payload[0].payload;
                     return (
@@ -215,7 +225,6 @@ export function BreakTimeAnalysisWidget({
                 radius={[2, 2, 0, 0]}
               />
             </BarChart>
-          </ResponsiveContainer>
         </ChartContainer>
       </div>
 

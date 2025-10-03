@@ -1,5 +1,4 @@
 import { Clock } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 import { Contract, TimeEntry, AppSettings } from '../../../hooks/useClockifyData';
 import { useMemo } from 'react';
 
@@ -13,11 +12,11 @@ interface TotalHoursWidgetProps {
 }
 
 export function TotalHoursWidget({
-  id,
+  id: _id,
   currentContract,
   timeEntries,
-  settings,
-  onRemove,
+  settings: _settings,
+  onRemove: _onRemove,
   size = { width: 3, height: 2 }
 }: TotalHoursWidgetProps) {
   const totalHours = useMemo(() => {

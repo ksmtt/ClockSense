@@ -19,7 +19,7 @@ export interface DashboardWidgetProps {
 }
 
 export function DashboardWidget({
-  id,
+  id: _id,
   title,
   description,
   icon,

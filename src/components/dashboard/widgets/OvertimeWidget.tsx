@@ -1,5 +1,4 @@
 import { Clock } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 import { Contract, TimeEntry, AppSettings } from '../../../hooks/useClockifyData';
 import { useMemo } from 'react';
 
@@ -13,18 +12,17 @@ interface OvertimeWidgetProps {
 }
 
 export function OvertimeWidget({
-  id,
+  id: _id,
   currentContract,
   timeEntries,
-  settings,
-  onRemove,
+  settings: _settings,
+  onRemove: _onRemove,
   size = { width: 3, height: 2 }
 }: OvertimeWidgetProps) {
   const overtimeData = useMemo(() => {
     if (!currentContract) return { overtime: 0, isOvertime: false };
 
     const contractStart = new Date(currentContract.startDate);
-    const contractEnd = new Date(currentContract.endDate);
     const now = new Date();
 
     // Calculate expected hours up to now
