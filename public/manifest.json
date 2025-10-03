@@ -44,7 +44,7 @@
             "id": "contracts_dummy",
             "name": "Contracts Tab Setting",
             "type": "TXT",
-            "value": "",
+            "value": "-",
             "required": false,
             "accessLevel": "EVERYONE"
           }
@@ -78,7 +78,7 @@
             "id": "notifications_dummy",
             "name": "Notifications Tab Setting",
             "type": "TXT",
-            "value": "",
+            "value": "-",
             "required": false,
             "accessLevel": "EVERYONE"
           }
@@ -112,7 +112,7 @@
             "id": "api_dummy",
             "name": "API Tab Setting",
             "type": "TXT",
-            "value": "",
+            "value": "-",
             "required": false,
             "accessLevel": "EVERYONE"
           }
@@ -146,7 +146,7 @@
             "id": "backup_dummy",
             "name": "Backup Tab Setting",
             "type": "TXT",
-            "value": "",
+            "value": "-",
             "required": false,
             "accessLevel": "EVERYONE"
           }
