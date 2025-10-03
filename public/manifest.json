@@ -38,6 +38,16 @@
               }
             ]
           }
+        ],
+        "settings": [
+          {
+            "id": "contracts_dummy",
+            "name": "Contracts Tab Setting",
+            "type": "TXT",
+            "value": "",
+            "required": false,
+            "accessLevel": "EVERYONE"
+          }
         ]
       },
       {
@@ -61,6 +71,16 @@
                 "accessLevel": "EVERYONE"
               }
             ]
+          }
+        ],
+        "settings": [
+          {
+            "id": "notifications_dummy",
+            "name": "Notifications Tab Setting",
+            "type": "TXT",
+            "value": "",
+            "required": false,
+            "accessLevel": "EVERYONE"
           }
         ]
       },
@@ -86,6 +106,16 @@
               }
             ]
           }
+        ],
+        "settings": [
+          {
+            "id": "api_dummy",
+            "name": "API Tab Setting",
+            "type": "TXT",
+            "value": "",
+            "required": false,
+            "accessLevel": "EVERYONE"
+          }
         ]
       },
       {
@@ -109,6 +139,16 @@
                 "accessLevel": "EVERYONE"
               }
             ]
+          }
+        ],
+        "settings": [
+          {
+            "id": "backup_dummy",
+            "name": "Backup Tab Setting",
+            "type": "TXT",
+            "value": "",
+            "required": false,
+            "accessLevel": "EVERYONE"
           }
         ]
       }
